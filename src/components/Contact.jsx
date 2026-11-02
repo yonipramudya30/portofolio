@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, MessageCircle, Send, Film, ArrowUp, Github, Instagram, Play, Phone, MapPin, Globe, Copy, Check } from 'lucide-react';
+import profileImg from '../assets/profile.jpg';
 
 const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -64,9 +65,10 @@ const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
               <div className="flex items-center gap-5 mb-8">
                 <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-white/20 shadow-md bg-slate-800 flex-shrink-0">
                   <img 
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200" 
+                    src={profileImg} 
                     alt="Yoni Pramudya" 
                     className="w-full h-full object-cover" 
+                    style={{ objectPosition: 'center 38%' }}
                   />
                 </div>
                 <div>

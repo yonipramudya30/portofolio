@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import profileImg from '../assets/profile.jpg';
 import {
   User, Phone, Mail, MapPin, Globe, Instagram, Github,
   GraduationCap, Briefcase, Code, Wrench, Heart,
@@ -150,9 +151,10 @@ const Resume = ({ onShowToast }) => {
               {/* Avatar */}
               <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-blue-500/50 shadow-xl flex-shrink-0">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200"
+                  src={profileImg}
                   alt="Yoni Pramudya"
                   className="w-full h-full object-cover"
+                  style={{ objectPosition: 'center 38%' }}
                 />
               </div>
 

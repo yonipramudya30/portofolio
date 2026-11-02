@@ -27,9 +27,10 @@ const About = ({ onShowToast }) => {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-600/25 rounded-full blur-[100px]"></div>
           <div className="relative z-10 w-full max-w-sm rounded-3xl overflow-hidden border border-white/15 glass-card shadow-2xl group">
             <img 
-              src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop" 
-              alt="Yoni Pramudya Working" 
+              src={profileImg} 
+              alt="Yoni Pramudya" 
               className="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
+              style={{ objectPosition: 'center 30%' }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
             

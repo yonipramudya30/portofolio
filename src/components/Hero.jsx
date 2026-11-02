@@ -1,5 +1,6 @@
 import React from 'react';
 import { Play, Compass, Sliders, LogOut, Terminal } from 'lucide-react';
+import profileImg from '../assets/profile.jpg';
 
 const Hero = ({ onOpenGame, onOpenOptions, onOpenExit, onScrollTo }) => {
   return (
@@ -16,9 +17,10 @@ const Hero = ({ onOpenGame, onOpenOptions, onOpenExit, onScrollTo }) => {
           <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-[2.5rem] blur-xl opacity-30 group-hover:opacity-60 transition duration-700"></div>
           <div className="relative h-[440px] sm:h-[480px] w-full max-w-sm rounded-[2rem] overflow-hidden border border-white/15 glass-card shadow-2xl">
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" 
+              src={profileImg} 
               alt="Yoni Pramudya" 
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" 
+              style={{ objectPosition: 'center 25%' }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
             
