@@ -2,7 +2,7 @@ import React from 'react';
 import { User, Code, Terminal, Database, Layers, Globe, FileText, Briefcase, GraduationCap, Zap } from 'lucide-react';
 import profileImg from '../assets/profile.jpg';
 
-const About = ({ onShowToast }) => {
+const About = ({ onShowToast, onOpenCV }) => {
   // Skills sesuai CV
   const webSkills = [
     { name: 'HTML & CSS', level: '90%', color: 'bg-orange-400' },
@@ -42,12 +42,12 @@ const About = ({ onShowToast }) => {
                 <span className="text-xs font-mono text-emerald-400 font-bold">● OPEN TO WORK</span>
               </div>
               <p className="text-[11px] text-white/80">
-                Mencari posisi Junior Web Developer / Fullstack Developer di Tangerang Selatan & sekitarnya.
+                Mencari posisi Junior Web Developer / Fullstack Developer di South Tangerang & sekitarnya.
               </p>
               <div className="flex items-center gap-2 mt-2 text-[11px] text-white/50">
-                <Globe className="w-3 h-3" />
-                <a href="https://yonipramudya.github.io" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors">
-                  yonipramudya.github.io
+                <Globe className="w-3 h-3 text-blue-400" />
+                <a href="https://yonipramudya30.github.io/portofolio/" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors">
+                  yonipramudya30.github.io/portofolio
                 </a>
               </div>
             </div>
@@ -74,7 +74,7 @@ const About = ({ onShowToast }) => {
                 <span className="text-blue-400">📱</span> 0896-0326-3148
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="text-blue-400">📍</span> Ciputat, Tangerang Selatan
+                <span className="text-blue-400">📍</span> South Tangerang
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="text-blue-400">📸</span> @yonipramudya
@@ -195,20 +195,20 @@ const About = ({ onShowToast }) => {
           {/* CV & Portfolio Links */}
           <div className="pt-2 flex flex-wrap gap-3">
             <button
-              onClick={() => onShowToast && onShowToast('📄 Membuka Curriculum Vitae Yoni Pramudya...')}
+              onClick={() => onOpenCV && onOpenCV()}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs uppercase tracking-widest transition-all"
             >
               <FileText className="w-4 h-4 text-blue-400" />
               <span>Lihat / Unduh CV</span>
             </button>
             <a 
-              href="https://yonipramudya.github.io" 
+              href="https://yonipramudya30.github.io/portofolio/" 
               target="_blank" 
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/40 border border-blue-500/40 text-blue-400 font-bold text-xs uppercase tracking-widest transition-all"
             >
               <Globe className="w-4 h-4" />
-              <span>yonipramudya.github.io</span>
+              <span>yonipramudya30.github.io/portofolio</span>
             </a>
           </div>
 

@@ -8,10 +8,10 @@ const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
   const [emailCopied, setEmailCopied] = useState(false);
 
   const pastReels = [
-    { id: 1, title: 'Wandlings.co — Marketplace Showcase', img: 'https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=400' },
+    { id: 1, title: 'Wandlings.co — Marketplace Showcase', img: 'https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=400', url: 'https://wandlings.pythonanywhere.com' },
     { id: 2, title: 'Sistem SPP Online Demo', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=400' },
     { id: 3, title: 'MOORA SPK — Skripsi Demo', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400' },
-    { id: 4, title: 'Portfolio GitHub Pages', img: 'https://images.unsplash.com/photo-1518173946687-a4c8a383392e?q=80&w=400' },
+    { id: 4, title: 'Portfolio GitHub Pages', img: 'https://images.unsplash.com/photo-1518173946687-a4c8a383392e?q=80&w=400', url: 'https://yonipramudya30.github.io/portofolio/' },
   ];
 
   const handleContactSubmit = (e) => {
@@ -44,14 +44,14 @@ const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
   return (
     <section id="contact" className="bg-gradient-cinematic relative pt-24 pb-12 px-6 md:px-16 lg:px-24 overflow-hidden border-t border-white/10">
       <div className="max-w-7xl mx-auto w-full">
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
-          
+
           {/* Left: Contact Card */}
           <div className="lg:col-span-5">
             <div className="glass-card p-8 rounded-3xl relative overflow-hidden border border-white/15 shadow-2xl">
               <div className="absolute -top-10 -right-10 w-44 h-44 bg-blue-600/30 blur-3xl rounded-full"></div>
-              
+
               <div className="flex items-center justify-between mb-8">
                 <span className="text-xs font-mono font-bold tracking-widest text-blue-400 uppercase">
                   HUBUNGI SAYA
@@ -60,14 +60,14 @@ const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
                   OPEN TO WORK
                 </span>
               </div>
-              
+
               {/* Profile */}
               <div className="flex items-center gap-5 mb-8">
                 <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-white/20 shadow-md bg-slate-800 flex-shrink-0">
-                  <img 
-                    src={profileImg} 
-                    alt="Yoni Pramudya" 
-                    className="w-full h-full object-cover" 
+                  <img
+                    src={profileImg}
+                    alt="Yoni Pramudya"
+                    className="w-full h-full object-cover"
                     style={{ objectPosition: 'center 38%' }}
                   />
                 </div>
@@ -82,7 +82,7 @@ const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
               <div className="space-y-2.5">
 
                 {/* Phone */}
-                <button 
+                <button
                   onClick={copyPhoneToClipboard}
                   className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors group text-left"
                 >
@@ -99,7 +99,7 @@ const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
                 </button>
 
                 {/* Email */}
-                <button 
+                <button
                   onClick={copyEmailToClipboard}
                   className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors group text-left"
                 >
@@ -118,9 +118,9 @@ const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
                 </button>
 
                 {/* WhatsApp */}
-                <a 
-                  href="https://wa.me/6289603263148?text=Halo%20Yoni,%20saya%20tertarik%20mengajak%20kolaborasi!" 
-                  target="_blank" 
+                <a
+                  href="https://wa.me/6289603263148?text=Halo%20Yoni,%20saya%20tertarik%20mengajak%20kolaborasi!"
+                  target="_blank"
                   rel="noreferrer"
                   className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white/5 hover:bg-emerald-600/20 border border-white/10 hover:border-emerald-500/40 transition-colors group text-left"
                 >
@@ -143,14 +143,14 @@ const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
                   </div>
                   <div>
                     <p className="text-[10px] text-white/40 uppercase font-mono">Domisili</p>
-                    <p className="text-xs font-semibold text-white/90">Ciputat, Tangerang Selatan</p>
+                    <p className="text-xs font-semibold text-white/90">South Tangerang</p>
                   </div>
                 </div>
 
                 {/* Portfolio GitHub */}
-                <a 
-                  href="https://yonipramudya.github.io" 
-                  target="_blank" 
+                <a
+                  href="https://yonipramudya30.github.io/portofolio/"
+                  target="_blank"
                   rel="noreferrer"
                   className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors group text-left"
                 >
@@ -160,7 +160,7 @@ const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
                     </div>
                     <div>
                       <p className="text-[10px] text-white/40 uppercase font-mono">Portfolio</p>
-                      <p className="text-xs font-semibold text-white/90">yonipramudya.github.io</p>
+                      <p className="text-xs font-semibold text-white/90">yonipramudya30.github.io/portofolio</p>
                     </div>
                   </div>
                   <span className="text-[11px] font-mono text-white/50 group-hover:text-blue-400">Buka →</span>
@@ -205,27 +205,27 @@ const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
               <p className="text-xs text-white/60 mb-6">
                 Punya tawaran pekerjaan, project kolaborasi, atau pertanyaan? Yuk ceritakan di sini!
               </p>
-              
+
               <form onSubmit={handleContactSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[11px] font-mono text-white/60 mb-1.5 uppercase">Nama Anda</label>
-                    <input 
+                    <input
                       type="text"
                       required
                       value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Budi Santoso"
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:bg-blue-500/5 focus:outline-none text-sm text-white placeholder-white/30 transition-colors"
                     />
                   </div>
                   <div>
                     <label className="block text-[11px] font-mono text-white/60 mb-1.5 uppercase">Email Anda</label>
-                    <input 
+                    <input
                       type="email"
                       required
                       value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="nama@perusahaan.com"
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:bg-blue-500/5 focus:outline-none text-sm text-white placeholder-white/30 transition-colors"
                     />
@@ -234,11 +234,11 @@ const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
 
                 <div>
                   <label className="block text-[11px] font-mono text-white/60 mb-1.5 uppercase">Pesan / Kebutuhan Proyek</label>
-                  <textarea 
+                  <textarea
                     rows="4"
                     required
                     value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Halo Yoni, saya butuh bantuan untuk membangun website/sistem..."
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:bg-blue-500/5 focus:outline-none text-sm text-white placeholder-white/30 resize-none transition-colors"
                   ></textarea>
@@ -268,12 +268,18 @@ const Contact = ({ onShowToast, onSelectReel, onScrollTo }) => {
                 <span className="text-xs font-mono font-bold tracking-widest uppercase">PREVIEW PROYEK PILIHAN</span>
                 <div className="h-[1px] flex-1 bg-white/10"></div>
               </div>
-              
+
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {pastReels.map(reel => (
-                  <div 
+                  <div
                     key={reel.id}
-                    onClick={() => onSelectReel && onSelectReel(reel)}
+                    onClick={() => {
+                      if (reel.url) {
+                        window.open(reel.url, '_blank', 'noopener,noreferrer');
+                      } else if (onSelectReel) {
+                        onSelectReel(reel);
+                      }
+                    }}
                     className="group relative h-24 rounded-2xl overflow-hidden glass-card cursor-pointer border border-white/10 hover:border-blue-500/50 transition-all"
                   >
                     <img src={reel.img} alt={reel.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />

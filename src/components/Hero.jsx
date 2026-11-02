@@ -135,8 +135,8 @@ const Hero = ({ onOpenGame, onOpenOptions, onOpenExit, onScrollTo }) => {
               <p className="text-[11px] text-white/50 font-mono uppercase">Proyek Utama</p>
             </div>
             <div>
-              <p className="text-2xl font-black text-blue-400">Ciputat</p>
-              <p className="text-[11px] text-white/50 font-mono uppercase">Tangerang Selatan</p>
+              <p className="text-xl sm:text-2xl font-black text-blue-400">South</p>
+              <p className="text-[11px] text-white/50 font-mono uppercase">Tangerang</p>
             </div>
             <div>
               <p className="text-2xl font-black text-purple-400">UNPAM</p>

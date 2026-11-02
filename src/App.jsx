@@ -4,12 +4,14 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Resume from './components/Resume';
 import Contact from './components/Contact';
-import { Gamepad2, Volume2, VolumeX, Settings, X, Sparkles, ExternalLink, Github, RefreshCw } from 'lucide-react';
+import cvImage from './assets/cv-yoni.png';
+import { Gamepad2, Volume2, VolumeX, Settings, X, Sparkles, ExternalLink, Github, RefreshCw, FileText } from 'lucide-react';
 
 function App() {
   const [isGameOpen, setIsGameOpen] = useState(false);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isExitOpen, setIsExitOpen] = useState(false);
+  const [isCVOpen, setIsCVOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedReel, setSelectedReel] = useState(null);
   const [toastMsg, setToastMsg] = useState('');
@@ -76,9 +78,9 @@ function App() {
         onOpenExit={() => setIsExitOpen(true)}
         onScrollTo={scrollTo}
       />
-      <About onShowToast={showToast} />
+      <About onShowToast={showToast} onOpenCV={() => setIsCVOpen(true)} />
       <Projects onSelectProject={(p) => setSelectedProject(p)} />
-      <Resume onShowToast={showToast} />
+      <Resume onShowToast={showToast} onOpenCV={() => setIsCVOpen(true)} />
       <Contact
         onShowToast={showToast}
         onSelectReel={(r) => setSelectedReel(r)}
@@ -137,13 +139,25 @@ function App() {
                 </ul>
               </div>
               <div className="pt-4 border-t border-white/10 flex flex-wrap gap-4">
-                <button
-                  onClick={() => showToast('🚀 Membuka demo: ' + selectedProject.title)}
-                  className="flex-1 min-w-[140px] py-3 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  Live Preview
-                </button>
+                {selectedProject.liveUrl ? (
+                  <a
+                    href={selectedProject.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 min-w-[140px] py-3 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2 text-white shadow-lg shadow-blue-500/25"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Live Preview
+                  </a>
+                ) : (
+                  <button
+                    onClick={() => showToast('ℹ️ Proyek sistem internal (offline): ' + selectedProject.title)}
+                    className="flex-1 min-w-[140px] py-3 bg-white/10 hover:bg-white/15 text-white/60 font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Demo Offline
+                  </button>
+                )}
                 <button
                   onClick={() => showToast('📂 Repository GitHub: ' + selectedProject.title)}
                   className="flex-1 min-w-[140px] py-3 glass-card hover:bg-white/10 font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2 text-white/80"
@@ -198,6 +212,47 @@ function App() {
               Hubungi Yoni Sekarang
             </button>
             <button onClick={() => setIsExitOpen(false)} className="text-xs text-white/40">Tutup</button>
+          </div>
+        </div>
+      )}
+
+      {/* CV Image Modal */}
+      {isCVOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/92 backdrop-blur-md"
+          onClick={() => setIsCVOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-2xl"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setIsCVOpen(false)}
+              className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center transition-colors shadow-lg"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <img
+              src={cvImage}
+              alt="CV Yoni Pramudya"
+              className="w-full rounded-2xl shadow-2xl border border-white/10"
+            />
+            <div className="flex gap-3 mt-4 justify-center pb-2">
+              <a
+                href={cvImage}
+                download="CV-Yoni-Pramudya.png"
+                className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold text-sm text-white flex items-center gap-2 transition-colors shadow-lg shadow-blue-500/25"
+              >
+                <FileText className="w-4 h-4" />
+                Unduh CV
+              </a>
+              <button
+                onClick={() => setIsCVOpen(false)}
+                className="px-6 py-2.5 bg-white/10 hover:bg-white/20 rounded-xl font-bold text-sm text-white/70 transition-colors"
+              >
+                Tutup
+              </button>
+            </div>
           </div>
         </div>
       )}

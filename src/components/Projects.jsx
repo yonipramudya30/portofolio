@@ -174,7 +174,7 @@ const Projects = ({ onSelectProject }) => {
                       className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600/20 border border-blue-500/40 text-blue-400 text-[11px] font-mono font-bold hover:bg-blue-600 hover:text-white transition-all flex-shrink-0"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
-                      {project.liveUrl.replace('https://', '')}
+                      Live Preview: {project.liveUrl.replace('https://', '')}
                     </a>
                   )}
                 </div>

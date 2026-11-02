@@ -8,7 +8,7 @@ import {
   CheckCircle2, Calendar, Building2, Award, Printer
 } from 'lucide-react';
 
-const Resume = ({ onShowToast }) => {
+const Resume = ({ onShowToast, onOpenCV }) => {
   const [activeTab, setActiveTab] = useState('semua');
 
   const handlePrint = () => {
@@ -126,18 +126,18 @@ const Resume = ({ onShowToast }) => {
 
           <div className="flex gap-3">
             <button
+              onClick={() => onOpenCV && onOpenCV()}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-blue-500/25"
+            >
+              <Download className="w-4 h-4" />
+              <span>Lihat CV</span>
+            </button>
+            <button
               onClick={handlePrint}
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs uppercase tracking-wider transition-all"
             >
               <Printer className="w-4 h-4 text-blue-400" />
               <span>Cetak / PDF</span>
-            </button>
-            <button
-              onClick={() => onShowToast && onShowToast('📄 Mengunduh file CV Yoni Pramudya...')}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-blue-500/25"
-            >
-              <Download className="w-4 h-4" />
-              <span>Download CV</span>
             </button>
           </div>
         </div>
@@ -177,9 +177,9 @@ const Resume = ({ onShowToast }) => {
               {[
                 { icon: Phone, text: '0896-0326-3148', href: 'tel:0896-0326-3148' },
                 { icon: Mail, text: 'yonipramudya9@gmail.com', href: 'mailto:yonipramudya9@gmail.com' },
-                { icon: MapPin, text: 'Ciputat, Tangerang Selatan', href: null },
+                { icon: MapPin, text: 'South Tangerang', href: null },
                 { icon: Instagram, text: '@yonipramudya', href: 'https://instagram.com/yonipramudya' },
-                { icon: Globe, text: 'yonipramudya.github.io', href: 'https://yonipramudya.github.io' },
+                { icon: Globe, text: 'yonipramudya30.github.io/portofolio', href: 'https://yonipramudya30.github.io/portofolio/' },
               ].map((item, i) => {
                 const IconComp = item.icon;
                 const content = (
@@ -405,7 +405,7 @@ const Resume = ({ onShowToast }) => {
           {/* FOOTER STRIP */}
           <div className="border-t border-white/10 px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-white/40 font-mono bg-white/2">
             <span>Yoni Pramudya · yonipramudya9@gmail.com · 0896-0326-3148</span>
-            <span>yonipramudya.github.io · Ciputat, Tangerang Selatan · 2026</span>
+            <span>yonipramudya30.github.io/portofolio · South Tangerang · 2026</span>
           </div>
 
         </div>

@@ -1043,16 +1043,19 @@
 
               {/* Actions */}
               <div className="pt-4 border-t border-white/10 flex flex-wrap gap-4">
-                <button
+                <a
+                  href="https://wandlings.pythonanywhere.com"
+                  target="_blank"
+                  rel="noreferrer"
                   onClick={() => {
                     sound.playClick();
-                    onShowToast('🚀 Membuka demo langsung untuk: ' + project.title);
+                    onShowToast('🚀 Membuka website proyek Wandlings.co...');
                   }}
-                  className="flex-1 min-w-[140px] py-3 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl text-sm transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2"
+                  className="flex-1 min-w-[140px] py-3 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl text-sm transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 text-white"
                 >
                   <Icon name="external-link" className="w-4 h-4" />
                   Live Preview
-                </button>
+                </a>
                 <button
                   onClick={() => {
                     sound.playClick();
@@ -1101,8 +1104,53 @@
       );
     };
 
+    // --- CV Image Modal ---
+    const CVModal = ({ isOpen, onClose }) => {
+      if (!isOpen) return null;
+      return (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/92 backdrop-blur-md"
+          onClick={onClose}
+        >
+          <div
+            className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-2xl"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              onClick={() => { sound.playClick(); onClose(); }}
+              className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center transition-colors shadow-lg"
+            >
+              <Icon name="x" className="w-5 h-5" />
+            </button>
+            <img
+              src="./cv-yoni.png"
+              alt="CV Yoni Pramudya"
+              className="w-full rounded-2xl shadow-2xl border border-white/10"
+            />
+            <div className="flex gap-3 mt-4 justify-center pb-2">
+              <a
+                href="./cv-yoni.png"
+                download="CV-Yoni-Pramudya.png"
+                onClick={() => sound.playClick()}
+                className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold text-sm text-white flex items-center gap-2 transition-colors shadow-lg shadow-blue-500/25"
+              >
+                <Icon name="download" className="w-4 h-4" />
+                Unduh CV
+              </a>
+              <button
+                onClick={() => { sound.playClick(); onClose(); }}
+                className="px-6 py-2.5 bg-white/10 hover:bg-white/20 rounded-xl font-bold text-sm text-white/70 transition-colors"
+              >
+                Tutup
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
     // --- Toast Notification Component ---
-    const Toast = ({ message, onDismiss }) => {
+    const Toast = ({ message, onDismiss }) => { {
       if (!message) return null;
       return (
         <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/90 text-white border border-blue-500/40 shadow-2xl backdrop-blur-md animate-bounce-once">
@@ -1130,6 +1178,7 @@
       const [isGameOpen, setIsGameOpen] = useState(false);
       const [isOptionsOpen, setIsOptionsOpen] = useState(false);
       const [isExitOpen, setIsExitOpen] = useState(false);
+      const [isCVOpen, setIsCVOpen] = useState(false);
       const [selectedProject, setSelectedProject] = useState(null);
       const [selectedReel, setSelectedReel] = useState(null);
 
@@ -1625,8 +1674,8 @@
                     <p className="text-[11px] text-white/50 font-mono uppercase">Proyek Utama</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-black text-blue-400">Ciputat</p>
-                    <p className="text-[11px] text-white/50 font-mono uppercase">Tangerang Selatan</p>
+                    <p className="text-xl sm:text-2xl font-black text-blue-400">South</p>
+                    <p className="text-[11px] text-white/50 font-mono uppercase">Tangerang</p>
                   </div>
                   <div>
                     <p className="text-2xl font-black text-purple-400">UNPAM</p>
@@ -1663,7 +1712,7 @@
                       <span className="text-xs font-mono text-emerald-400 font-bold">● OPEN TO WORK</span>
                     </div>
                     <p className="text-xs text-white/80 mt-1">
-                      Mencari posisi Junior Web Developer / Fullstack Developer di Tangerang Selatan & sekitarnya.
+                      Mencari posisi Junior Web Developer / Fullstack Developer di South Tangerang & sekitarnya.
                     </p>
                   </div>
                 </div>
@@ -1684,7 +1733,7 @@
                   </p>
                   <div className="mt-4 flex flex-wrap gap-3 text-xs text-white/60">
                     <span>📱 0896-0326-3148</span>
-                    <span>📍 Ciputat, Tangerang Selatan</span>
+                    <span>📍 South Tangerang</span>
                     <span>📸 @yonipramudya</span>
                   </div>
                 </div>
@@ -2193,6 +2242,11 @@
           <ReelModal
             reel={selectedReel}
             onClose={() => setSelectedReel(null)}
+          />
+
+          <CVModal
+            isOpen={isCVOpen}
+            onClose={() => setIsCVOpen(false)}
           />
 
           <Toast
