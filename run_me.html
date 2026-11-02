@@ -1,78 +1,359 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8">
-  <title>Portfolio 2026</title>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yoni Pramudya - Portfolio & Interactive Experience 2026</title>
+
   <!-- CDN Dependencies -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- Custom CSS -->
   <style>
+    :root {
+      --accent-color: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.5);
+    }
+
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
       background-color: #020408;
-      color: white;
+      color: #f8fafc;
     }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
     .bg-gradient-cinematic {
-      background: linear-gradient(135deg, #0a0f1d 0%, #020408 100%);
+      background: radial-gradient(circle at 50% 0%, #0d1629 0%, #020408 75%);
     }
+
     .glass-card {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(15, 23, 42, 0.65);
       backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
+
+    .glass-card-interactive {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card-interactive:hover {
+      transform: translateY(-4px);
+      border-color: rgba(96, 165, 250, 0.4);
+      box-shadow: 0 20px 35px -10px rgba(59, 130, 246, 0.25);
+    }
+
     .text-glow {
-      text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+      text-shadow: 0 0 25px var(--accent-glow);
     }
-    html {
-      scroll-behavior: smooth;
+
+    .text-glow-sm {
+      text-shadow: 0 0 12px var(--accent-glow);
     }
-    .lucide { 
-      width: 24px; 
-      height: 24px; 
-      stroke-width: 2; 
-      stroke: currentColor; 
-      fill: none; 
-      stroke-linecap: round; 
-      stroke-linejoin: round; 
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #020408;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b82f6;
+    }
+
+    /* CRT Scanline Overlay */
+    .scanlines {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+      background-size: 100% 4px;
+      pointer-events: none;
+    }
+
+    /* Lucide icon default */
+    .lucide {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        opacity: 0.4;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+      }
+    }
+
+    .animate-pulse-glow {
+      animation: pulseGlow 4s infinite ease-in-out;
+    }
+
+    @keyframes floatSlow {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .animate-float {
+      animation: floatSlow 5s infinite ease-in-out;
     }
   </style>
-  
+
   <!-- Tailwind Config -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          colors: { darkBg: '#020408', darkGradientStart: '#0a0f1d' },
-          fontFamily: { sans: ['Inter', 'sans-serif'] }
+          colors: {
+            darkBg: '#020408',
+            darkGradientStart: '#0d1629',
+            brandBlue: '#3b82f6',
+            brandPurple: '#8b5cf6',
+            brandEmerald: '#10b981',
+            brandAmber: '#f59e0b',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
         }
       }
     }
   </script>
 </head>
-<body class="antialiased selection:bg-blue-500/30">
-  
+
+<body class="antialiased selection:bg-blue-500/30 selection:text-white">
+
   <div id="root"></div>
 
   <!-- React Code -->
   <script type="text/babel">
-    const { useState, useEffect } = React;
+    const { useState, useEffect, useRef } = React;
 
-    // Helper component untuk me-render Icon lucide-react di environment tanpa bundler
-    const Icon = ({ name, className }) => {
+    // --- Web Audio Synthesizer (Zero-dependency sound generator) ---
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+        this.bgmPlaying = false;
+        this.bgmOscs = [];
+        this.bgmGain = null;
+      }
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+      playHover() {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.04);
+          gain.gain.setValueAtTime(0.02, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.04);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.04);
+        } catch (e) { }
+      }
+      playClick() {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(520, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(260, this.ctx.currentTime + 0.08);
+          gain.gain.setValueAtTime(0.06, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.08);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.08);
+        } catch (e) { }
+      }
+      playLaser() {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(880, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(110, this.ctx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.12);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.12);
+        } catch (e) { }
+      }
+      playExplosion() {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          if (!this.ctx) return;
+          // Noise simulation
+          const bufferSize = this.ctx.sampleRate * 0.15;
+          const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            data[i] = Math.random() * 2 - 1;
+          }
+          const noise = this.ctx.createBufferSource();
+          noise.buffer = buffer;
+          const filter = this.ctx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(600, this.ctx.currentTime);
+          filter.frequency.linearRampToValueAtTime(80, this.ctx.currentTime + 0.15);
+          const gain = this.ctx.createGain();
+          gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
+          noise.connect(filter);
+          filter.connect(gain);
+          gain.connect(this.ctx.destination);
+          noise.start();
+        } catch (e) { }
+      }
+      playVictory() {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const notes = [261.63, 329.63, 392.00, 523.25];
+          notes.forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, this.ctx.currentTime + idx * 0.08);
+            gain.gain.setValueAtTime(0.08, this.ctx.currentTime + idx * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + (idx + 1) * 0.12);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(this.ctx.currentTime + idx * 0.08);
+            osc.stop(this.ctx.currentTime + (idx + 1) * 0.12);
+          });
+        } catch (e) { }
+      }
+      toggleBgm() {
+        this.init();
+        if (!this.ctx) return false;
+        if (this.bgmPlaying) {
+          this.stopBgm();
+          return false;
+        } else {
+          this.startBgm();
+          return true;
+        }
+      }
+      startBgm() {
+        if (this.bgmPlaying || !this.ctx) return;
+        try {
+          this.bgmGain = this.ctx.createGain();
+          this.bgmGain.gain.setValueAtTime(0.03, this.ctx.currentTime);
+          this.bgmGain.connect(this.ctx.destination);
+
+          // Ambient chords: Dm9 (D, F, A, C, E) relaxing synth
+          const freqs = [146.83, 174.61, 220.00, 261.63, 329.63];
+          this.bgmOscs = freqs.map((f, i) => {
+            const osc = this.ctx.createOscillator();
+            osc.type = i % 2 === 0 ? 'sine' : 'triangle';
+            osc.frequency.setValueAtTime(f, this.ctx.currentTime);
+            // subtle detune for warmth
+            osc.detune.setValueAtTime((i - 2) * 4, this.ctx.currentTime);
+            osc.connect(this.bgmGain);
+            osc.start();
+            return osc;
+          });
+          this.bgmPlaying = true;
+        } catch (e) { }
+      }
+      stopBgm() {
+        if (!this.bgmPlaying) return;
+        try {
+          if (this.bgmOscs) {
+            this.bgmOscs.forEach(o => {
+              try { o.stop(); o.disconnect(); } catch (e) { }
+            });
+            this.bgmOscs = [];
+          }
+          if (this.bgmGain) {
+            this.bgmGain.disconnect();
+            this.bgmGain = null;
+          }
+          this.bgmPlaying = false;
+        } catch (e) { }
+      }
+    }
+
+    const sound = new SoundEngine();
+
+    // Icon helper component
+    const Icon = ({ name, className = '' }) => {
       useEffect(() => {
         if (window.lucide) {
           lucide.createIcons();
@@ -81,243 +362,1849 @@
       return <i data-lucide={name} className={className}></i>;
     };
 
-    const Hero = () => (
-      <section className="min-h-screen bg-gradient-cinematic flex flex-col relative px-6 py-8 md:px-16 lg:px-24">
-        {/* Navbar */}
-        <nav className="flex justify-between items-center mb-16 z-10">
-          <div className="text-3xl font-black tracking-tighter text-white">YP.</div>
-          <ul className="hidden md:flex gap-8 text-sm font-medium tracking-widest uppercase text-white/70">
-            <li className="text-white cursor-pointer hover:text-white transition-colors">Home</li>
-            <li className="cursor-pointer hover:text-white transition-colors">About</li>
-            <li className="cursor-pointer hover:text-white transition-colors">Work</li>
-            <li className="cursor-pointer hover:text-white transition-colors">Contact</li>
-          </ul>
-          <button className="md:hidden text-white">
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-          </button>
-        </nav>
+    // --- Interactive Particle Starfield Canvas for Hero ---
+    const HeroCanvas = () => {
+      const canvasRef = useRef(null);
 
-        {/* Content */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-red-600 rounded-[2.5rem] blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
-            <div className="relative h-[500px] w-full max-w-md mx-auto bg-red-900 rounded-[2rem] overflow-hidden border border-red-500/30">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" alt="Profile" className="w-full h-full object-cover opacity-80 mix-blend-overlay" />
-              <div className="absolute inset-0 bg-gradient-to-t from-red-950/80 to-transparent"></div>
-            </div>
-          </div>
+      useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let animationFrameId;
 
-          <div className="flex flex-col justify-center items-start space-y-8">
-            <div>
-              <div className="inline-block px-4 py-1.5 rounded-full border border-white/20 bg-white/5 text-xs font-bold tracking-widest text-blue-400 mb-4 backdrop-blur-sm">
-                FRESHGRADUATE
+        let width = canvas.width = canvas.parentElement.offsetWidth;
+        let height = canvas.height = canvas.parentElement.offsetHeight;
+
+        const handleResize = () => {
+          if (!canvas.parentElement) return;
+          width = canvas.width = canvas.parentElement.offsetWidth;
+          height = canvas.height = canvas.parentElement.offsetHeight;
+        };
+        window.addEventListener('resize', handleResize);
+
+        const particles = Array.from({ length: 45 }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 1.6 + 0.4,
+          speedX: (Math.random() - 0.5) * 0.4,
+          speedY: (Math.random() - 0.5) * 0.4,
+          color: Math.random() > 0.4 ? 'rgba(59, 130, 246,' : 'rgba(139, 92, 246,',
+          alpha: Math.random() * 0.5 + 0.2
+        }));
+
+        const render = () => {
+          ctx.clearRect(0, 0, width, height);
+
+          // Draw grid lines
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+          ctx.lineWidth = 1;
+          const gridSize = 60;
+          for (let x = 0; x < width; x += gridSize) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, height);
+            ctx.stroke();
+          }
+          for (let y = 0; y < height; y += gridSize) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(width, y);
+            ctx.stroke();
+          }
+
+          // Draw particles
+          particles.forEach((p, idx) => {
+            p.x += p.speedX;
+            p.y += p.speedY;
+
+            if (p.x < 0) p.x = width;
+            if (p.x > width) p.x = 0;
+            if (p.y < 0) p.y = height;
+            if (p.y > height) p.y = 0;
+
+            ctx.fillStyle = `${p.color} ${p.alpha})`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Link close particles
+            for (let j = idx + 1; j < particles.length; j++) {
+              const p2 = particles[j];
+              const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+              if (dist < 90) {
+                ctx.strokeStyle = `rgba(59, 130, 246, ${0.15 * (1 - dist / 90)})`;
+                ctx.lineWidth = 0.8;
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+              }
+            }
+          });
+
+          animationFrameId = requestAnimationFrame(render);
+        };
+        render();
+
+        return () => {
+          cancelAnimationFrame(animationFrameId);
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
+
+      return <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none z-0" />;
+    };
+
+    // --- Mini-Game: CYBER BUG SLAYER 2026 ---
+    const MiniGameModal = ({ isOpen, onClose, onShowToast }) => {
+      const canvasRef = useRef(null);
+      const [gameState, setGameState] = useState('PLAYING'); // 'PLAYING', 'GAMEOVER', 'VICTORY'
+      const [score, setScore] = useState(0);
+      const [lives, setLives] = useState(3);
+      const [highScore, setHighScore] = useState(() => {
+        return parseInt(localStorage.getItem('yp_highscore') || '0', 10);
+      });
+
+      useEffect(() => {
+        if (!isOpen) return;
+        sound.init();
+        sound.playVictory();
+
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let animId;
+
+        const cw = canvas.width = 640;
+        const ch = canvas.height = 420;
+
+        let player = {
+          x: cw / 2 - 20,
+          y: ch - 50,
+          w: 40,
+          h: 24,
+          speed: 6,
+          movingLeft: false,
+          movingRight: false,
+          lastShot: 0
+        };
+
+        let bullets = [];
+        let enemies = [];
+        let particles = [];
+        let currentScore = 0;
+        let currentLives = 3;
+        let spawnTimer = 0;
+        let isRunning = true;
+
+        const bugLabels = ['404', 'NULL', 'BUG', 'SYNTAX', 'MERGE!'];
+        const bugColors = ['#ef4444', '#f97316', '#ec4899', '#a855f7', '#eab308'];
+
+        const spawnEnemy = () => {
+          const typeIdx = Math.floor(Math.random() * bugLabels.length);
+          enemies.push({
+            x: Math.random() * (cw - 70) + 10,
+            y: -30,
+            w: 56,
+            h: 24,
+            speed: Math.random() * 1.5 + 1.2,
+            text: bugLabels[typeIdx],
+            color: bugColors[typeIdx]
+          });
+        };
+
+        const handleKeyDown = (e) => {
+          if (e.code === 'ArrowLeft' || e.key === 'a' || e.key === 'A') player.movingLeft = true;
+          if (e.code === 'ArrowRight' || e.key === 'd' || e.key === 'D') player.movingRight = true;
+          if (e.code === 'Space' || e.code === 'KeyW' || e.key === 'w') {
+            shoot();
+            e.preventDefault();
+          }
+        };
+
+        const handleKeyUp = (e) => {
+          if (e.code === 'ArrowLeft' || e.key === 'a' || e.key === 'A') player.movingLeft = false;
+          if (e.code === 'ArrowRight' || e.key === 'd' || e.key === 'D') player.movingRight = false;
+        };
+
+        const shoot = () => {
+          const now = Date.now();
+          if (now - player.lastShot > 160) {
+            bullets.push({
+              x: player.x + player.w / 2 - 3,
+              y: player.y - 8,
+              w: 6,
+              h: 14,
+              speed: 9
+            });
+            player.lastShot = now;
+            sound.playLaser();
+          }
+        };
+
+        // Mouse & Touch support on canvas
+        const handleCanvasMouseMove = (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const scaleX = canvas.width / rect.width;
+          const mouseX = (e.clientX - rect.left) * scaleX;
+          player.x = Math.max(0, Math.min(cw - player.w, mouseX - player.w / 2));
+        };
+
+        const handleCanvasClick = (e) => {
+          shoot();
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
+        canvas.addEventListener('mousemove', handleCanvasMouseMove);
+        canvas.addEventListener('click', handleCanvasClick);
+
+        const loop = () => {
+          if (!isRunning) return;
+
+          // Clear
+          ctx.fillStyle = '#050a14';
+          ctx.fillRect(0, 0, cw, ch);
+
+          // Starfield background
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+          for (let i = 0; i < 30; i++) {
+            const sx = (i * 37 + (Date.now() * 0.05 * (i % 3 + 1))) % cw;
+            const sy = (i * 29 + (Date.now() * 0.1 * (i % 2 + 1))) % ch;
+            ctx.fillRect(sx, sy, 1.5, 1.5);
+          }
+
+          // Player movement
+          if (player.movingLeft) player.x = Math.max(0, player.x - player.speed);
+          if (player.movingRight) player.x = Math.min(cw - player.w, player.x + player.speed);
+
+          // Draw Player Ship (Neon Cyber style)
+          ctx.save();
+          ctx.fillStyle = '#3b82f6';
+          ctx.shadowColor = '#60a5fa';
+          ctx.shadowBlur = 12;
+          ctx.beginPath();
+          ctx.moveTo(player.x + player.w / 2, player.y);
+          ctx.lineTo(player.x + player.w, player.y + player.h);
+          ctx.lineTo(player.x + player.w / 2, player.y + player.h - 6);
+          ctx.lineTo(player.x, player.y + player.h);
+          ctx.closePath();
+          ctx.fill();
+
+          // Thruster flame
+          ctx.fillStyle = Math.random() > 0.5 ? '#f97316' : '#eab308';
+          ctx.beginPath();
+          ctx.moveTo(player.x + player.w / 2 - 5, player.y + player.h - 4);
+          ctx.lineTo(player.x + player.w / 2 + 5, player.y + player.h - 4);
+          ctx.lineTo(player.x + player.w / 2, player.y + player.h + 8 + Math.random() * 6);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+
+          // Bullets
+          for (let i = bullets.length - 1; i >= 0; i--) {
+            const b = bullets[i];
+            b.y -= b.speed;
+            ctx.fillStyle = '#38bdf8';
+            ctx.shadowColor = '#38bdf8';
+            ctx.shadowBlur = 8;
+            ctx.fillRect(b.x, b.y, b.w, b.h);
+
+            if (b.y < -20) {
+              bullets.splice(i, 1);
+            }
+          }
+
+          // Spawn enemies
+          spawnTimer++;
+          if (spawnTimer % 45 === 0) {
+            spawnEnemy();
+          }
+
+          // Enemies update & collisions
+          for (let eIdx = enemies.length - 1; eIdx >= 0; eIdx--) {
+            const enemy = enemies[eIdx];
+            enemy.y += enemy.speed;
+
+            // Draw Enemy Card
+            ctx.save();
+            ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+            ctx.strokeStyle = enemy.color;
+            ctx.lineWidth = 1.5;
+            ctx.shadowColor = enemy.color;
+            ctx.shadowBlur = 8;
+            ctx.strokeRect(enemy.x, enemy.y, enemy.w, enemy.h);
+            ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h);
+
+            ctx.fillStyle = enemy.color;
+            ctx.font = 'bold 11px "JetBrains Mono", monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText(enemy.text, enemy.x + enemy.w / 2, enemy.y + 16);
+            ctx.restore();
+
+            // Check hit by bullet
+            for (let bIdx = bullets.length - 1; bIdx >= 0; bIdx--) {
+              const b = bullets[bIdx];
+              if (
+                b.x > enemy.x &&
+                b.x < enemy.x + enemy.w &&
+                b.y > enemy.y &&
+                b.y < enemy.y + enemy.h
+              ) {
+                // Enemy destroyed!
+                sound.playExplosion();
+                // Explosion particles
+                for (let p = 0; p < 8; p++) {
+                  particles.push({
+                    x: enemy.x + enemy.w / 2,
+                    y: enemy.y + enemy.h / 2,
+                    vx: (Math.random() - 0.5) * 6,
+                    vy: (Math.random() - 0.5) * 6,
+                    color: enemy.color,
+                    life: 20
+                  });
+                }
+                enemies.splice(eIdx, 1);
+                bullets.splice(bIdx, 1);
+                currentScore += 100;
+                setScore(currentScore);
+                break;
+              }
+            }
+
+            // Check enemy reached bottom or hit player
+            if (enemy.y > ch - 15) {
+              enemies.splice(eIdx, 1);
+              currentLives -= 1;
+              setLives(currentLives);
+              sound.playLaser();
+              if (currentLives <= 0) {
+                isRunning = false;
+                setGameState('GAMEOVER');
+                if (currentScore > highScore) {
+                  localStorage.setItem('yp_highscore', currentScore.toString());
+                  setHighScore(currentScore);
+                  onShowToast('🎉 Rekor Baru Tercipta! Skor: ' + currentScore);
+                }
+                break;
+              }
+            }
+          }
+
+          // Particles
+          for (let pIdx = particles.length - 1; pIdx >= 0; pIdx--) {
+            const p = particles[pIdx];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.life--;
+            ctx.fillStyle = p.color;
+            ctx.fillRect(p.x, p.y, 3, 3);
+            if (p.life <= 0) particles.splice(pIdx, 1);
+          }
+
+          if (isRunning) {
+            animId = requestAnimationFrame(loop);
+          }
+        };
+
+        animId = requestAnimationFrame(loop);
+
+        return () => {
+          isRunning = false;
+          cancelAnimationFrame(animId);
+          window.removeEventListener('keydown', handleKeyDown);
+          window.removeEventListener('keyup', handleKeyUp);
+          if (canvas) {
+            canvas.removeEventListener('mousemove', handleCanvasMouseMove);
+            canvas.removeEventListener('click', handleCanvasClick);
+          }
+        };
+      }, [isOpen, gameState]);
+
+      if (!isOpen) return null;
+
+      const resetGame = () => {
+        setScore(0);
+        setLives(3);
+        setGameState('PLAYING');
+      };
+
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="relative w-full max-w-2xl glass-card rounded-2xl border border-blue-500/30 overflow-hidden shadow-2xl">
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-slate-900/80">
+              <div className="flex items-center gap-3">
+                <span className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span>
+                <h3 className="font-mono text-sm md:text-base font-bold tracking-widest text-blue-400">
+                  CYBER BUG SLAYER // ARCADE 2026
+                </h3>
               </div>
-              <h1 className="text-6xl md:text-8xl font-black leading-none tracking-tight">
-                PORTFOLIO<br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-glow">2026</span>
-              </h1>
+              <div className="flex items-center gap-4 text-xs font-mono">
+                <span className="text-white/60">HIGHSCORE: <strong className="text-yellow-400">{highScore}</strong></span>
+                <button
+                  onClick={() => { sound.playClick(); onClose(); }}
+                  className="p-1 rounded-lg hover:bg-white/10 text-white/70 hover:text-white transition-colors"
+                >
+                  <Icon name="x" className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
-            <div className="flex flex-col gap-4 w-full max-w-xs mt-8">
-              <button className="glass-card py-4 px-8 rounded-xl font-bold tracking-widest hover:bg-white/10 hover:border-blue-500/50 transition-all text-left flex justify-between items-center group">
-                <span>START</span>
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-              </button>
-              <button className="glass-card py-4 px-8 rounded-xl font-bold tracking-widest hover:bg-white/10 hover:border-white/30 transition-all text-left flex justify-between items-center group text-white/70 hover:text-white">
-                <span>OPTIONS</span>
-              </button>
-              <button className="glass-card py-4 px-8 rounded-xl font-bold tracking-widest hover:bg-red-500/20 hover:border-red-500/50 hover:text-red-400 transition-all text-left flex justify-between items-center group text-white/50">
-                <span>EXIT</span>
+            {/* Score HUD */}
+            <div className="flex justify-between items-center px-6 py-2 bg-slate-950/70 border-b border-white/5 font-mono text-xs">
+              <div className="flex items-center gap-2">
+                <span className="text-white/50">SKOR:</span>
+                <span className="text-base font-bold text-blue-400">{score}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-white/50 mr-1">NYAWA:</span>
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <span key={i} className={`text-base ${i < lives ? 'text-red-500' : 'text-white/20'}`}>♥</span>
+                ))}
+              </div>
+              <div className="text-white/40 hidden sm:block">
+                KONTROL: [A/D atau Gerakkan Mouse] + [Spasi / Klik Tembak]
+              </div>
+            </div>
+
+            {/* Canvas area */}
+            <div className="relative bg-slate-950 flex justify-center items-center">
+              <canvas
+                ref={canvasRef}
+                className="w-full h-[320px] sm:h-[380px] cursor-crosshair block"
+              />
+
+              {gameState === 'GAMEOVER' && (
+                <div className="absolute inset-0 bg-black/85 flex flex-col items-center justify-center p-6 text-center z-10">
+                  <h4 className="text-3xl md:text-4xl font-black font-mono text-red-500 mb-2 tracking-wider">
+                    GAME OVER!
+                  </h4>
+                  <p className="text-white/70 text-sm mb-4">Bug berhasil menembus server produksi!</p>
+                  <div className="bg-white/5 p-4 rounded-xl border border-white/10 mb-6 font-mono text-sm">
+                    <p className="text-white/50">Skor Akhir: <strong className="text-blue-400 text-lg">{score}</strong></p>
+                    <p className="text-white/50">High Score: <strong className="text-yellow-400">{highScore}</strong></p>
+                  </div>
+                  <div className="flex gap-4">
+                    <button
+                      onClick={resetGame}
+                      className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl text-sm transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2"
+                    >
+                      <Icon name="refresh-cw" className="w-4 h-4" />
+                      Main Lagi
+                    </button>
+                    <button
+                      onClick={onClose}
+                      className="px-6 py-2.5 glass-card hover:bg-white/10 text-white/70 hover:text-white font-bold rounded-xl text-sm transition-all"
+                    >
+                      Kembali ke Portfolio
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Footer tip */}
+            <div className="px-6 py-3 bg-slate-900/80 border-t border-white/10 flex justify-between items-center text-xs text-white/50">
+              <span>🚀 Tips: Tembak bug bertuliskan 404, NULL, dan MERGE sebelum menyentuh bawah!</span>
+              <button
+                onClick={resetGame}
+                className="hover:text-blue-400 font-mono transition-colors"
+              >
+                [RESTART]
               </button>
             </div>
           </div>
         </div>
-      </section>
-    );
+      );
+    };
 
-    const About = () => (
-      <section className="min-h-screen bg-[#020408] relative px-6 py-20 md:px-16 lg:px-24 flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
-          <div className="relative order-2 lg:order-1 flex justify-center">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-600/30 rounded-full blur-[100px]"></div>
-            <div className="relative z-10 w-full max-w-sm rounded-2xl overflow-hidden border border-white/10 glass-card">
-              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop" alt="Half Body" className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-            </div>
-          </div>
+    // --- Options Modal ---
+    const OptionsModal = ({ isOpen, onClose, soundEnabled, setSoundEnabled, bgmPlaying, onToggleBgm, theme, setTheme, scanlines, setScanlines, onShowToast }) => {
+      if (!isOpen) return null;
 
-          <div className="order-1 lg:order-2 space-y-10">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4 text-glow">ABOUT ME</h2>
-              <p className="text-white/60 leading-relaxed max-w-lg text-sm md:text-base">
-                Lulusan Teknik Informatika Universitas Pamulang yang menguasai pengembangan frontend dan backend berbasis Python, PHP, dan MySQL. Berpengalaman membangun berbagai proyek web fungsional seperti marketplace dan sistem pendukung keputusan. Terbiasa berkolaborasi dalam tim, beradaptasi cepat, dan berorientasi pada penyelesaian masalah yang efisien.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-bold tracking-widest text-blue-400 mb-4">SOFTWARE SKILLS</h3>
-              <div className="flex gap-4">
-                <div className="w-14 h-14 rounded-xl glass-card flex items-center justify-center hover:bg-blue-500/20 transition-colors cursor-pointer group">
-                  <Icon name="image" className="text-white/50 group-hover:text-blue-400" />
-                </div>
-                <div className="w-14 h-14 rounded-xl glass-card flex items-center justify-center hover:bg-orange-500/20 transition-colors cursor-pointer group">
-                  <Icon name="pen-tool" className="text-white/50 group-hover:text-orange-400" />
-                </div>
-                <div className="w-14 h-14 rounded-xl glass-card flex items-center justify-center hover:bg-purple-500/20 transition-colors cursor-pointer group">
-                  <Icon name="video" className="text-white/50 group-hover:text-purple-400" />
-                </div>
-                <div className="w-14 h-14 rounded-xl glass-card flex items-center justify-center hover:bg-gray-100/20 transition-colors cursor-pointer group">
-                  <Icon name="monitor-play" className="text-white/50 group-hover:text-white" />
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4 border-t border-white/10">
-              <div>
-                <h3 className="text-xs font-bold tracking-widest text-white/40 mb-2">EDUCATION</h3>
-                <p className="text-sm font-medium">B.Sc Digital Media</p>
-                <p className="text-xs text-white/50 mt-1">University of Arts, 2024</p>
-              </div>
-              <div>
-                <h3 className="text-xs font-bold tracking-widest text-white/40 mb-2">EXPERIENCE</h3>
-                <p className="text-sm font-medium">Creative Director</p>
-                <p className="text-xs text-white/50 mt-1">Studio YP, 2022-Present</p>
-              </div>
-              <div>
-                <h3 className="text-xs font-bold tracking-widest text-white/40 mb-2">LANGUAGE</h3>
-                <p className="text-sm font-medium">English, ID</p>
-                <p className="text-xs text-white/50 mt-1">Native / Bilingual</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-
-    const Projects = () => {
-      const [activeFilter, setActiveFilter] = useState('ALL');
-      const filters = ['ALL', 'DESIGN', 'VIDEO', 'AI'];
-
-      const projects = [
-        { id: 1, title: 'Neon Nights', category: 'VIDEO', img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800' },
-        { id: 2, title: 'Brand Identity', category: 'DESIGN', img: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=800' },
-        { id: 3, title: 'AI Generated Worlds', category: 'AI', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800' },
-        { id: 4, title: 'Cinematic Reel', category: 'VIDEO', img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800' },
-        { id: 5, title: 'App UI Kit', category: 'DESIGN', img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800' },
-        { id: 6, title: 'Future Concepts', category: 'AI', img: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=800' },
-        { id: 7, title: 'Music Video', category: 'VIDEO', img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800' },
-        { id: 8, title: 'Typography', category: 'DESIGN', img: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800' },
+      const themes = [
+        { id: 'blue', name: 'Cyber Blue', color: '#3b82f6', bg: 'bg-blue-500' },
+        { id: 'purple', name: 'Neon Purple', color: '#8b5cf6', bg: 'bg-purple-500' },
+        { id: 'emerald', name: 'Matrix Emerald', color: '#10b981', bg: 'bg-emerald-500' },
+        { id: 'amber', name: 'Solar Amber', color: '#f59e0b', bg: 'bg-amber-500' },
       ];
 
       return (
-        <section className="min-h-screen bg-[#020408] py-20 px-6 md:px-16 lg:px-24">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-black tracking-tight">RECAP PROJECT <span className="text-blue-500">2026</span></h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="relative w-full max-w-md glass-card rounded-2xl border border-white/15 p-6 shadow-2xl">
+            <div className="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
+              <div className="flex items-center gap-2">
+                <Icon name="settings" className="text-blue-400 w-5 h-5" />
+                <h3 className="font-bold text-lg tracking-wide">PENGATURAN SISTEM</h3>
+              </div>
+              <button
+                onClick={() => { sound.playClick(); onClose(); }}
+                className="p-1 rounded-lg hover:bg-white/10 text-white/60 hover:text-white transition-colors"
+              >
+                <Icon name="x" className="w-5 h-5" />
+              </button>
             </div>
-            <div className="flex gap-2 bg-white/5 p-1 rounded-xl backdrop-blur-md">
-              {filters.map(filter => (
-                <button 
-                  key={filter}
-                  onClick={() => setActiveFilter(filter)}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold tracking-widest transition-all ${activeFilter === filter ? 'bg-blue-600 text-white' : 'text-white/50 hover:text-white hover:bg-white/10'}`}
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {projects.filter(p => activeFilter === 'ALL' || p.category === activeFilter).map((project) => (
-              <div key={project.id} className="group relative aspect-[4/5] rounded-2xl overflow-hidden glass-card cursor-pointer">
-                <img src={project.img} alt={project.title} className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80"></div>
-                <div className="absolute bottom-0 left-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <span className="text-xs font-bold tracking-widest text-blue-400 mb-2 block">{project.category}</span>
-                  <h3 className="text-xl font-bold">{project.title}</h3>
+            <div className="space-y-6">
+              {/* Sound FX Toggle */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="font-semibold text-sm">Efek Suara (SFX)</h4>
+                  <p className="text-xs text-white/50">Audio responsif saat klik tombol & game</p>
+                </div>
+                <button
+                  onClick={() => {
+                    const newState = !soundEnabled;
+                    setSoundEnabled(newState);
+                    sound.enabled = newState;
+                    if (newState) sound.playClick();
+                    onShowToast(newState ? '🔊 Efek suara DIAKTIFKAN' : '🔇 Efek suara DIMATIKAN');
+                  }}
+                  className={`w-12 h-6 rounded-full p-1 transition-colors ${soundEnabled ? 'bg-blue-600' : 'bg-slate-700'}`}
+                >
+                  <div className={`w-4 h-4 rounded-full bg-white transition-transform ${soundEnabled ? 'translate-x-6' : 'translate-x-0'}`} />
+                </button>
+              </div>
+
+              {/* BGM Toggle */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="font-semibold text-sm">Musik Lofi Synthwave (BGM)</h4>
+                  <p className="text-xs text-white/50">Synthesizer ambient relaksasi Web Audio</p>
+                </div>
+                <button
+                  onClick={() => {
+                    const active = onToggleBgm();
+                    onShowToast(active ? '🎵 Musik Ambient Lofi Dimainkan' : '⏹ Musik Dihentikan');
+                  }}
+                  className={`w-12 h-6 rounded-full p-1 transition-colors ${bgmPlaying ? 'bg-blue-600' : 'bg-slate-700'}`}
+                >
+                  <div className={`w-4 h-4 rounded-full bg-white transition-transform ${bgmPlaying ? 'translate-x-6' : 'translate-x-0'}`} />
+                </button>
+              </div>
+
+              {/* CRT Scanline */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="font-semibold text-sm">Efek Retro CRT Scanline</h4>
+                  <p className="text-xs text-white/50">Tekstur monitor arcade jadul</p>
+                </div>
+                <button
+                  onClick={() => {
+                    sound.playClick();
+                    setScanlines(!scanlines);
+                    onShowToast(!scanlines ? '📺 Efek CRT Scanline Aktif' : '📺 Efek CRT Nonaktif');
+                  }}
+                  className={`w-12 h-6 rounded-full p-1 transition-colors ${scanlines ? 'bg-blue-600' : 'bg-slate-700'}`}
+                >
+                  <div className={`w-4 h-4 rounded-full bg-white transition-transform ${scanlines ? 'translate-x-6' : 'translate-x-0'}`} />
+                </button>
+              </div>
+
+              {/* Theme Color */}
+              <div>
+                <h4 className="font-semibold text-sm mb-2">Aksen Warna Tema</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {themes.map(t => (
+                    <button
+                      key={t.id}
+                      onClick={() => {
+                        sound.playClick();
+                        setTheme(t.id);
+                        document.documentElement.style.setProperty('--accent-color', t.color);
+                        document.documentElement.style.setProperty('--accent-glow', `${t.color}80`);
+                        onShowToast(`🎨 Tema ${t.name} diterapkan!`);
+                      }}
+                      className={`p-2.5 rounded-xl border flex items-center gap-3 transition-all ${theme === t.id
+                          ? 'border-white/50 bg-white/10'
+                          : 'border-white/10 hover:border-white/20 bg-white/5'
+                        }`}
+                    >
+                      <span className={`w-4 h-4 rounded-full ${t.bg}`}></span>
+                      <span className="text-xs font-medium">{t.name}</span>
+                    </button>
+                  ))}
                 </div>
               </div>
-            ))}
+            </div>
+
+            <div className="mt-8 pt-4 border-t border-white/10 flex justify-end">
+              <button
+                onClick={() => { sound.playClick(); onClose(); }}
+                className="px-6 py-2 bg-blue-600 hover:bg-blue-500 rounded-xl text-xs font-bold tracking-wider uppercase transition-colors"
+              >
+                Selesai
+              </button>
+            </div>
           </div>
-        </section>
+        </div>
       );
     };
 
-    const Contact = () => (
-      <section className="bg-gradient-cinematic relative pt-20 pb-10 px-6 md:px-16 lg:px-24 overflow-hidden border-t border-white/10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
-          <div>
-            <div className="glass-card p-8 rounded-3xl max-w-md relative overflow-hidden">
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-600/30 blur-3xl rounded-full"></div>
-              <h3 className="text-sm font-bold tracking-widest text-blue-400 mb-8">CONTACT ME</h3>
-              
-              <div className="flex items-center gap-6 mb-8">
-                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white/20">
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200" alt="Profile" className="w-full h-full object-cover" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold">Yoni Pramudya</h4>
-                  <p className="text-sm text-white/50 mt-1">Available for work</p>
-                </div>
+    // --- Exit Modal ---
+    const ExitModal = ({ isOpen, onClose, onOpenGame, onScrollTo }) => {
+      if (!isOpen) return null;
+
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="relative w-full max-w-md glass-card rounded-2xl border border-red-500/30 p-6 text-center shadow-2xl">
+            <div className="w-16 h-16 rounded-full bg-red-500/20 text-red-400 mx-auto flex items-center justify-center mb-4">
+              <Icon name="door-closed" className="w-8 h-8" />
+            </div>
+            <h3 className="text-2xl font-bold mb-2">Ingin Keluar Sekarang?</h3>
+            <p className="text-white/60 text-sm mb-6 leading-relaxed">
+              "You can't quit the future!" 🚀 Jangan buru-buru pergi, bro! Yoni siap diajak kolaborasi untuk project web & software impianmu.
+            </p>
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={() => {
+                  sound.playClick();
+                  onClose();
+                  onScrollTo('contact');
+                }}
+                className="w-full py-3 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl text-sm transition-all shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2"
+              >
+                <Icon name="mail" className="w-4 h-4" />
+                Hubungi Yoni Sekarang
+              </button>
+              <button
+                onClick={() => {
+                  sound.playClick();
+                  onClose();
+                  onOpenGame();
+                }}
+                className="w-full py-3 bg-white/10 hover:bg-white/20 font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2"
+              >
+                <Icon name="gamepad-2" className="w-4 h-4 text-yellow-400" />
+                Main Mini-Game Dulu Saja!
+              </button>
+              <button
+                onClick={() => { sound.playClick(); onClose(); }}
+                className="w-full py-2.5 text-white/40 hover:text-white text-xs font-semibold transition-colors"
+              >
+                Tutup Jendela Ini
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // --- Project Detail Lightbox Modal ---
+    const ProjectDetailModal = ({ project, onClose, onShowToast }) => {
+      if (!project) return null;
+
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto glass-card rounded-2xl border border-white/20 shadow-2xl">
+            {/* Header Image */}
+            <div className="relative h-64 sm:h-72 w-full overflow-hidden">
+              <img src={project.img} alt={project.title} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+              <button
+                onClick={() => { sound.playClick(); onClose(); }}
+                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center transition-colors"
+              >
+                <Icon name="x" className="w-5 h-5" />
+              </button>
+              <div className="absolute bottom-4 left-6 right-6">
+                <span className="inline-block px-3 py-1 rounded-full text-xs font-bold tracking-wider bg-blue-600/80 text-white mb-2">
+                  {project.category}
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-black text-white">{project.title}</h3>
+              </div>
+            </div>
+
+            {/* Body */}
+            <div className="p-6 space-y-6">
+              <div>
+                <h4 className="text-xs font-bold tracking-widest text-blue-400 uppercase mb-2">DESKRIPSI PROYEK</h4>
+                <p className="text-white/80 leading-relaxed text-sm sm:text-base">
+                  {project.description}
+                </p>
               </div>
 
-              <div className="space-y-4">
-                <a href="mailto:yonipramudya9@gmail.com" className="flex items-center gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors group">
-                  <Icon name="mail" className="text-white/50 group-hover:text-blue-400" />
-                  <span className="font-medium text-white/70 group-hover:text-white">yonipramudya9@gmail.com</span>
-                </a>
-                <a href="#" className="flex items-center gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors group">
-                  <Icon name="message-circle" className="text-white/50 group-hover:text-green-500" />
-                  <span className="font-medium text-white/70 group-hover:text-white">WhatsApp</span>
-                </a>
+              <div>
+                <h4 className="text-xs font-bold tracking-widest text-blue-400 uppercase mb-3">FITUR KUNCI & TEKNOLOGI</h4>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.techStack.map((tech, idx) => (
+                    <span key={idx} className="px-3 py-1 rounded-lg text-xs font-mono bg-white/10 border border-white/10 text-white/90">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <ul className="space-y-2 text-xs sm:text-sm text-white/70 list-disc list-inside">
+                  {project.features.map((f, i) => (
+                    <li key={i}>{f}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Actions */}
+              <div className="pt-4 border-t border-white/10 flex flex-wrap gap-4">
+                <button
+                  onClick={() => {
+                    sound.playClick();
+                    onShowToast('🚀 Membuka demo langsung untuk: ' + project.title);
+                  }}
+                  className="flex-1 min-w-[140px] py-3 bg-blue-600 hover:bg-blue-500 font-bold rounded-xl text-sm transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2"
+                >
+                  <Icon name="external-link" className="w-4 h-4" />
+                  Live Preview
+                </button>
+                <button
+                  onClick={() => {
+                    sound.playClick();
+                    onShowToast('📂 Repository GitHub: ' + project.title);
+                  }}
+                  className="flex-1 min-w-[140px] py-3 glass-card hover:bg-white/10 font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2 text-white/80 hover:text-white"
+                >
+                  <Icon name="github" className="w-4 h-4" />
+                  Source Code
+                </button>
               </div>
             </div>
           </div>
+        </div>
+      );
+    };
 
-          <div className="flex flex-col justify-between">
-            <div className="mt-10 lg:mt-0">
-              <h2 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-none opacity-10">
-                THANK<br/>YOU<br/>2026
-              </h2>
+    // --- Media Reel Modal ---
+    const ReelModal = ({ reel, onClose }) => {
+      if (!reel) return null;
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md">
+          <div className="relative w-full max-w-xl glass-card rounded-2xl border border-white/20 overflow-hidden shadow-2xl p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="font-bold text-lg text-white">{reel.title}</h3>
+              <button
+                onClick={() => { sound.playClick(); onClose(); }}
+                className="p-1 rounded-lg hover:bg-white/10 text-white/60 hover:text-white"
+              >
+                <Icon name="x" className="w-5 h-5" />
+              </button>
             </div>
-            
-            <div className="mt-12">
-              <div className="flex items-center gap-4 text-white/30 mb-6">
-                <Icon name="film" className="w-5 h-5" />
-                <div className="h-[1px] flex-1 bg-white/10"></div>
-                <span className="text-xs font-bold tracking-widest">PAST REELS</span>
-                <div className="h-[1px] flex-1 bg-white/10"></div>
+            <div className="relative aspect-video rounded-xl overflow-hidden mb-4 bg-slate-900 flex items-center justify-center group">
+              <img src={reel.img} alt={reel.title} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-blue-600/80 text-white flex items-center justify-center pl-1 group-hover:scale-110 transition-transform">
+                  <Icon name="play" className="w-8 h-8 fill-current" />
+                </div>
               </div>
-              
-              <div className="flex gap-4 overflow-x-auto pb-4 hide-scrollbar">
-                {[1,2,3,4].map(i => (
-                  <div key={i} className="min-w-[120px] h-[80px] rounded-lg overflow-hidden glass-card opacity-50 hover:opacity-100 transition-opacity cursor-pointer grayscale hover:grayscale-0">
-                    <img src={`https://images.unsplash.com/photo-${1500000000000 + i}?q=80&w=200`} alt="Thumbnail" className="w-full h-full object-cover" />
+            </div>
+            <p className="text-xs text-white/60 text-center">
+              Reel Portofolio Video & Motion Graphics oleh Yoni Pramudya. Diproduksi dengan Premiere Pro & After Effects.
+            </p>
+          </div>
+        </div>
+      );
+    };
+
+    // --- Toast Notification Component ---
+    const Toast = ({ message, onDismiss }) => {
+      if (!message) return null;
+      return (
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/90 text-white border border-blue-500/40 shadow-2xl backdrop-blur-md animate-bounce-once">
+          <Icon name="sparkles" className="w-5 h-5 text-blue-400" />
+          <span className="text-xs sm:text-sm font-medium">{message}</span>
+          <button onClick={onDismiss} className="ml-2 text-white/40 hover:text-white">
+            <Icon name="x" className="w-4 h-4" />
+          </button>
+        </div>
+      );
+    };
+
+    // ==========================================
+    // MAIN APP COMPONENT
+    // ==========================================
+    const App = () => {
+      const [soundEnabled, setSoundEnabled] = useState(true);
+      const [bgmPlaying, setBgmPlaying] = useState(false);
+      const [theme, setTheme] = useState('blue');
+      const [scanlines, setScanlines] = useState(false);
+      const [activeSection, setActiveSection] = useState('home');
+      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+      // Modals
+      const [isGameOpen, setIsGameOpen] = useState(false);
+      const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+      const [isExitOpen, setIsExitOpen] = useState(false);
+      const [selectedProject, setSelectedProject] = useState(null);
+      const [selectedReel, setSelectedReel] = useState(null);
+
+      // Toast feedback
+      const [toastMsg, setToastMsg] = useState('');
+      const toastTimerRef = useRef(null);
+
+      const showToast = (msg) => {
+        if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+        setToastMsg(msg);
+        toastTimerRef.current = setTimeout(() => setToastMsg(''), 3500);
+      };
+
+      const handleToggleBgm = () => {
+        const active = sound.toggleBgm();
+        setBgmPlaying(active);
+        return active;
+      };
+
+      const scrollToSection = (id) => {
+        sound.playClick();
+        setActiveSection(id);
+        setMobileMenuOpen(false);
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+
+      // Active section watcher
+      useEffect(() => {
+        const sections = ['home', 'about', 'projects', 'contact'];
+        const handleScroll = () => {
+          const scrollPosition = window.scrollY + 200;
+          for (const section of sections) {
+            const el = document.getElementById(section);
+            if (el) {
+              const top = el.offsetTop;
+              const height = el.offsetHeight;
+              if (scrollPosition >= top && scrollPosition < top + height) {
+                setActiveSection(section);
+                break;
+              }
+            }
+          }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      // Projects Data
+      const [activeFilter, setActiveFilter] = useState('ALL');
+      const [searchQuery, setSearchQuery] = useState('');
+      const filters = ['ALL', 'WEB APP', 'DATA & SYSTEM', 'CREATIVE & VIDEO', 'DESIGN'];
+
+      const projects = [
+        {
+          id: 1,
+          title: 'Marketplace Sembako & Retail',
+          category: 'WEB APP',
+          img: 'https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=800',
+          description: 'Aplikasi platform marketplace jual-beli bahan pokok & retail berbasis web. Dilengkapi sistem manajemen inventaris barang, integrasi pembayaran digital Midtrans API, dan dashboard analisis omzet untuk pedagang UMKM.',
+          techStack: ['PHP', 'MySQL', 'Bootstrap 5', 'Midtrans API', 'JavaScript'],
+          features: [
+            'Sistem autentikasi multi-level (Admin, Penjual, Pembeli)',
+            'Integrasi payment gateway otomatis Midtrans',
+            'Laporan inventori stok barang otomatis dan grafik penjualan mingguan',
+            'Desain responsif yang ringan untuk pengguna mobile'
+          ]
+        },
+        {
+          id: 2,
+          title: 'SPK Keputusan Beasiswa & Kinerja',
+          category: 'DATA & SYSTEM',
+          img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800',
+          description: 'Sistem Pendukung Keputusan (SPK) multi-kriteria menggunakan kombinasi metode SAW (Simple Additive Weighting) dan AHP. Membantu menentukan penerima beasiswa dan ranking performa tim secara objektif berbasis data empiris.',
+          techStack: ['Python', 'Flask', 'MySQL', 'Pandas', 'Tailwind CSS'],
+          features: [
+            'Normalisasi matriks dan kalkulasi bobot otomatis',
+            'Ekspor laporan audit ranking dalam format PDF & Excel',
+            'Visualisasi data radar chart & visual bar perbandingan kandidat',
+            'Validasi data input real-time untuk mencegah anomali skor'
+          ]
+        },
+        {
+          id: 3,
+          title: 'Neon Nights: Cyber Short Movie',
+          category: 'CREATIVE & VIDEO',
+          img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800',
+          description: 'Produksi video sinematik dengan visual neon retro-futuristik. Menampilkan color grading teal & orange kustom, sound design futuristik, dan motion tracking dinamis yang telah ditonton puluhan ribu kali.',
+          techStack: ['Premiere Pro', 'After Effects', 'DaVinci Resolve', '4K 60FPS'],
+          features: [
+            'Kustomisasi Look Up Tables (LUTs) cinematic',
+            'Sinkronisasi ketukan audio sound effect 3D audio space',
+            'Motion typography & animasi logo futuristik'
+          ]
+        },
+        {
+          id: 4,
+          title: 'Brand Identity & Design System',
+          category: 'DESIGN',
+          img: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=800',
+          description: 'Desain identitas visual menyeluruh untuk brand modern studio digital. Mulai dari filosofi logo, tipografi kustom, pedoman warna HSL, hingga aset media sosial yang konsisten dan elegan.',
+          techStack: ['Figma', 'Adobe Illustrator', 'Photoshop', 'Brand Guidelines'],
+          features: [
+            'Panduan pedoman brand lengkap (Brand Guideline Book)',
+            'Pustaka komponen UI kit Figma berbasis auto-layout',
+            'Format vektor scalable SVG berkualitas tinggi'
+          ]
+        },
+        {
+          id: 5,
+          title: 'Sistem POS & Inventaris Gudang',
+          category: 'WEB APP',
+          img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800',
+          description: 'Aplikasi kasir Point of Sale (POS) dan pergudangan terpadu. Mendukung scan barcode kamera web, cetak struk thermal via Bluetooth, dan notifikasi stok menipis secara otomatis.',
+          techStack: ['PHP', 'CodeIgniter 4', 'MySQL', 'AJAX', 'Chart.js'],
+          features: [
+            'Pencatatan transaksi kasir kilat tanpa reload halaman (AJAX)',
+            'Cetak struk thermal 58mm & 80mm secara instan',
+            'Peringatan otomatis saat stok produk di bawah batas aman'
+          ]
+        },
+        {
+          id: 6,
+          title: 'AI Generative Visual Exploration',
+          category: 'CREATIVE & VIDEO',
+          img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800',
+          description: 'Eksplorasi visual konsep dunia masa depan berbasis AI prompt engineering dan komposisi digital di Photoshop. Menghasilkan konsep arsitektur cyberpunk dan surreal art.',
+          techStack: ['Midjourney', 'Stable Diffusion', 'Photoshop', 'Prompt Engineering'],
+          features: [
+            'Penyusunan prompt kompleks multi-layer',
+            'Digital composite retouching resolusi tinggi 8K',
+            'Penerapan texture lighting realistis'
+          ]
+        },
+        {
+          id: 7,
+          title: 'Cinematic Reel 2026',
+          category: 'CREATIVE & VIDEO',
+          img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800',
+          description: 'Kompilasi portfolio video berdurasi 60 detik yang merangkum hasil produksi visual, iklan produk komersial, dan footage visual efek terkini.',
+          techStack: ['Premiere Pro', 'DaVinci Resolve', 'Sound Design'],
+          features: [
+            'Pacing video cepat dan energik',
+            'Transisi whip pan & masking halus',
+            'Mixing master audio standar broadcast'
+          ]
+        },
+        {
+          id: 8,
+          title: 'Interactive Portfolio Experience',
+          category: 'WEB APP',
+          img: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800',
+          description: 'Website portofolio interaktif dengan game engine berbasis HTML5 Canvas, Web Audio API sound synthesizer, navigasi responsif, dan modal lightbox canggih tanpa dependensi eksternal yang berat.',
+          techStack: ['React', 'Tailwind CSS', 'Web Audio API', 'HTML5 Canvas'],
+          features: [
+            'Built-in arcade game "Cyber Bug Slayer"',
+            'Sound effects sintetis tanpa loading file audio eksternal',
+            'Aksen tema warna & toggle CRT scanline kustom'
+          ]
+        }
+      ];
+
+      const filteredProjects = projects.filter(p => {
+        const matchesCategory = activeFilter === 'ALL' || p.category === activeFilter;
+        const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.description.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+      });
+
+      // Curated past reels
+      const pastReels = [
+        { id: 1, title: 'Cinematic Drone & Landscape', img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=400' },
+        { id: 2, title: 'Urban Cyberpunk Tokyo Night', img: 'https://images.unsplash.com/photo-1518173946687-a4c8a383392e?q=80&w=400' },
+        { id: 3, title: 'Commercial Product Motion', img: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=400' },
+        { id: 4, title: 'Music Video Festival Reel', img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400' },
+      ];
+
+      // Contact Form State
+      const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+      const [formSubmitting, setFormSubmitting] = useState(false);
+
+      const handleContactSubmit = (e) => {
+        e.preventDefault();
+        sound.playClick();
+        if (!formData.name || !formData.email || !formData.message) {
+          showToast('⚠️ Harap isi semua formulir terlebih dahulu!');
+          return;
+        }
+        setFormSubmitting(true);
+        setTimeout(() => {
+          setFormSubmitting(false);
+          setFormData({ name: '', email: '', message: '' });
+          sound.playVictory();
+          showToast('✅ Pesan berhasil dikirim! Terima kasih, Yoni akan segera merespons.');
+        }, 800);
+      };
+
+      const copyEmailToClipboard = () => {
+        sound.playClick();
+        navigator.clipboard.writeText('yonipramudya9@gmail.com');
+        showToast('📋 Email disalin ke clipboard: yonipramudya9@gmail.com');
+      };
+
+      return (
+        <div className={`relative min-h-screen bg-darkBg text-slate-100 ${scanlines ? 'scanlines' : ''}`}>
+
+          {/* ========================================================= */}
+          {/* STICKY NAVBAR */}
+          {/* ========================================================= */}
+          <header className="fixed top-0 left-0 right-0 z-40 bg-darkBg/80 backdrop-blur-xl border-b border-white/10 transition-all">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              {/* Logo */}
+              <div
+                onClick={() => scrollToSection('home')}
+                className="flex items-center gap-2 cursor-pointer group"
+              >
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center font-black text-white text-lg tracking-tighter shadow-lg shadow-blue-500/30 group-hover:scale-105 transition-transform">
+                  YP
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-lg font-black tracking-tighter text-white group-hover:text-blue-400 transition-colors">
+                    YONI PRAMUDYA
+                  </span>
+                  <span className="text-[10px] font-mono tracking-widest text-white/50 -mt-1">
+                    IT & CREATIVE DEV
+                  </span>
+                </div>
+              </div>
+
+              {/* Desktop Menu */}
+              <nav className="hidden md:flex items-center gap-8">
+                {[
+                  { id: 'home', label: 'Home' },
+                  { id: 'about', label: 'Tentang' },
+                  { id: 'projects', label: 'Proyek' },
+                  { id: 'contact', label: 'Kontak' },
+                ].map(item => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`text-xs font-bold uppercase tracking-widest transition-all relative py-1 ${activeSection === item.id
+                        ? 'text-blue-400 font-extrabold'
+                        : 'text-white/60 hover:text-white'
+                      }`}
+                  >
+                    {item.label}
+                    {activeSection === item.id && (
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 rounded-full shadow-[0_0_8px_#3b82f6]"></span>
+                    )}
+                  </button>
+                ))}
+              </nav>
+
+              {/* Right Action Icons */}
+              <div className="flex items-center gap-3">
+                {/* Play mini game shortcut */}
+                <button
+                  onClick={() => {
+                    sound.playClick();
+                    setIsGameOpen(true);
+                  }}
+                  className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-blue-600/20 border border-blue-500/40 text-blue-400 hover:bg-blue-600 hover:text-white text-xs font-mono font-bold transition-all shadow-sm"
+                  title="Mainkan Mini-Game"
+                >
+                  <Icon name="gamepad-2" className="w-4 h-4" />
+                  <span>PLAY GAME</span>
+                </button>
+
+                {/* Sound Toggle */}
+                <button
+                  onClick={() => {
+                    const newState = !soundEnabled;
+                    setSoundEnabled(newState);
+                    sound.enabled = newState;
+                    if (newState) sound.playClick();
+                    showToast(newState ? '🔊 Audio DIAKTIFKAN' : '🔇 Audio DIMATIKAN');
+                  }}
+                  className="p-2 rounded-xl glass-card hover:bg-white/10 text-white/70 hover:text-white transition-colors"
+                  title={soundEnabled ? 'Matikan Suara' : 'Aktifkan Suara'}
+                >
+                  <Icon name={soundEnabled ? 'volume-2' : 'volume-x'} className="w-5 h-5 text-blue-400" />
+                </button>
+
+                {/* Settings Toggle */}
+                <button
+                  onClick={() => {
+                    sound.playClick();
+                    setIsOptionsOpen(true);
+                  }}
+                  className="p-2 rounded-xl glass-card hover:bg-white/10 text-white/70 hover:text-white transition-colors"
+                  title="Pengaturan"
+                >
+                  <Icon name="settings" className="w-5 h-5" />
+                </button>
+
+                {/* Mobile Hamburger */}
+                <button
+                  onClick={() => {
+                    sound.playClick();
+                    setMobileMenuOpen(!mobileMenuOpen);
+                  }}
+                  className="md:hidden p-2 rounded-xl glass-card text-white hover:bg-white/10"
+                >
+                  <Icon name={mobileMenuOpen ? 'x' : 'menu'} className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+
+            {/* Mobile Menu Dropdown */}
+            {mobileMenuOpen && (
+              <div className="md:hidden px-6 py-6 bg-slate-950/95 border-b border-white/10 backdrop-blur-2xl space-y-4">
+                {[
+                  { id: 'home', label: 'Home' },
+                  { id: 'about', label: 'Tentang' },
+                  { id: 'projects', label: 'Proyek' },
+                  { id: 'contact', label: 'Kontak' },
+                ].map(item => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className="block w-full text-left py-2 text-sm font-bold tracking-widest uppercase text-white/80 hover:text-blue-400"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+                <div className="pt-4 border-t border-white/10 flex gap-3">
+                  <button
+                    onClick={() => {
+                      sound.playClick();
+                      setMobileMenuOpen(false);
+                      setIsGameOpen(true);
+                    }}
+                    className="flex-1 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs flex items-center justify-center gap-2"
+                  >
+                    <Icon name="gamepad-2" className="w-4 h-4" />
+                    MAIN MINI-GAME
+                  </button>
+                  <button
+                    onClick={() => {
+                      sound.playClick();
+                      setMobileMenuOpen(false);
+                      setIsOptionsOpen(true);
+                    }}
+                    className="px-4 py-2.5 rounded-xl glass-card text-white text-xs font-bold"
+                  >
+                    PENGATURAN
+                  </button>
+                </div>
+              </div>
+            )}
+          </header>
+
+          {/* ========================================================= */}
+          {/* SECTION 1: HERO */}
+          {/* ========================================================= */}
+          <section id="home" className="min-h-screen bg-gradient-cinematic flex flex-col justify-center relative px-6 pt-28 pb-16 md:px-16 lg:px-24 overflow-hidden">
+            <HeroCanvas />
+
+            <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
+
+              {/* Left Column: Visual Portrait */}
+              <div className="lg:col-span-5 relative group order-2 lg:order-1 flex justify-center">
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-[2.5rem] blur-xl opacity-30 group-hover:opacity-60 transition duration-700 animate-pulse-glow"></div>
+                <div className="relative h-[440px] sm:h-[480px] w-full max-w-sm rounded-[2rem] overflow-hidden border border-white/15 glass-card shadow-2xl">
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
+                    alt="Yoni Pramudya"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+
+                  {/* Floating Badges */}
+                  <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-slate-950/80 border border-white/10 backdrop-blur-md flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span className="text-[11px] font-mono text-emerald-400 font-bold">OPEN TO WORK · FRESH GRADUATE</span>
+                  </div>
+
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <p className="text-xs font-mono text-blue-400 mb-1">UNIVERSITAS PAMULANG · 2022–2026</p>
+                    <h3 className="text-xl font-bold text-white">Yoni Pramudya</h3>
+                    <p className="text-xs text-white/60">Teknik Informatika · Web Development</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Title & Interactive Game Menu */}
+              <div className="lg:col-span-7 flex flex-col justify-center items-start space-y-6 order-1 lg:order-2">
+                <div>
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-xs font-bold font-mono tracking-widest text-blue-400 mb-4 backdrop-blur-md">
+                    <Icon name="terminal" className="w-3.5 h-3.5" />
+                    <span>FRESH GRADUATE TEKNIK INFORMATIKA · WEB DEVELOPMENT</span>
+                  </div>
+                  <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tight">
+                    PORTFOLIO<br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 text-glow">
+                      2026
+                    </span>
+                  </h1>
+                  <p className="text-white/70 max-w-lg mt-4 text-sm sm:text-base leading-relaxed">
+                    Lulusan Teknik Informatika Universitas Pamulang dengan minat pada pengembangan website dan sistem informasi. Berpengalaman dari perancangan alur sistem, tampilan frontend, pengelolaan database, hingga deployment — termasuk marketplace dan sistem pendukung keputusan.
+                  </p>
+                </div>
+
+                {/* Game Style Menu Buttons (FULLY WORKING & CLICKABLE!) */}
+                <div className="flex flex-col gap-3.5 w-full max-w-sm pt-4">
+                  {/* START / PLAY GAME */}
+                  <button
+                    onClick={() => {
+                      sound.playClick();
+                      setIsGameOpen(true);
+                    }}
+                    className="glass-card-interactive py-4 px-6 rounded-2xl font-bold tracking-widest text-left flex justify-between items-center group border border-blue-500/40 bg-gradient-to-r from-blue-600/20 to-transparent hover:from-blue-600/30"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                        <Icon name="play" className="w-4 h-4 fill-current" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-white text-sm font-black">START GAME</span>
+                        <span className="text-[10px] text-blue-300 font-mono tracking-normal">Mainkan Arcade Bug Slayer</span>
+                      </div>
+                    </div>
+                    <span className="text-blue-400 font-mono text-sm opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
+                      [PLAY]
+                    </span>
+                  </button>
+
+                  {/* EXPLORE PORTFOLIO */}
+                  <button
+                    onClick={() => scrollToSection('about')}
+                    className="glass-card-interactive py-4 px-6 rounded-2xl font-bold tracking-widest text-left flex justify-between items-center group text-white/90 hover:text-white border-white/10"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-white/10 text-white/70 flex items-center justify-center group-hover:bg-white/20 group-hover:text-white transition-colors">
+                        <Icon name="compass" className="w-4 h-4" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-white text-sm font-black">JELAJAHI PORTFOLIO</span>
+                        <span className="text-[10px] text-white/50 font-mono tracking-normal">Lihat Skill & Proyek Unggulan</span>
+                      </div>
+                    </div>
+                    <span className="text-white/40 group-hover:text-white font-mono text-sm transition-colors">
+                      ↓
+                    </span>
+                  </button>
+
+                  {/* OPTIONS / SETTINGS */}
+                  <button
+                    onClick={() => {
+                      sound.playClick();
+                      setIsOptionsOpen(true);
+                    }}
+                    className="glass-card-interactive py-3.5 px-6 rounded-2xl font-bold tracking-widest text-left flex justify-between items-center group text-white/70 hover:text-white border-white/10"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-white/5 text-white/50 flex items-center justify-center group-hover:text-white transition-colors">
+                        <Icon name="sliders" className="w-4 h-4" />
+                      </div>
+                      <span className="text-sm">OPTIONS / SETTINGS</span>
+                    </div>
+                    <span className="text-white/30 group-hover:text-white font-mono text-xs">
+                      [CONFIG]
+                    </span>
+                  </button>
+
+                  {/* EXIT */}
+                  <button
+                    onClick={() => {
+                      sound.playClick();
+                      setIsExitOpen(true);
+                    }}
+                    className="glass-card-interactive py-3 px-6 rounded-2xl font-bold tracking-widest text-left flex justify-between items-center group text-white/50 hover:text-red-400 hover:border-red-500/40 hover:bg-red-500/10"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-white/5 text-white/30 flex items-center justify-center group-hover:text-red-400 transition-colors">
+                        <Icon name="log-out" className="w-4 h-4" />
+                      </div>
+                      <span className="text-sm">EXIT</span>
+                    </div>
+                    <span className="text-white/20 group-hover:text-red-400 font-mono text-xs">
+                      [ESC]
+                    </span>
+                  </button>
+                </div>
+
+                {/* Quick Stats Badges */}
+                <div className="grid grid-cols-3 gap-4 pt-4 border-t border-white/10 w-full max-w-md">
+                  <div>
+                    <p className="text-2xl font-black text-white">3+</p>
+                    <p className="text-[11px] text-white/50 font-mono uppercase">Proyek Utama</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-black text-blue-400">Ciputat</p>
+                    <p className="text-[11px] text-white/50 font-mono uppercase">Tangerang Selatan</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-black text-purple-400">UNPAM</p>
+                    <p className="text-[11px] text-white/50 font-mono uppercase">S1 Informatika</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          {/* ========================================================= */}
+          {/* SECTION 2: ABOUT & SKILLS */}
+          {/* ========================================================= */}
+          <section id="about" className="min-h-screen bg-[#020408] relative px-6 py-28 md:px-16 lg:px-24 flex items-center border-t border-white/5">
+            <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+
+              {/* Left Column: Visual Half-Body */}
+              <div className="lg:col-span-5 relative order-2 lg:order-1 flex justify-center">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-600/25 rounded-full blur-[100px]"></div>
+                <div className="relative z-10 w-full max-w-sm rounded-3xl overflow-hidden border border-white/15 glass-card shadow-2xl group">
+                  <img
+                    src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop"
+                    alt="Yoni Pramudya Working"
+                    className="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+
+                  {/* Skill Badge on image */}
+                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-slate-950/80 border border-white/10 backdrop-blur-md">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono text-blue-400 font-bold">STATUS</span>
+                      <span className="text-xs font-mono text-emerald-400 font-bold">● OPEN TO WORK</span>
+                    </div>
+                    <p className="text-xs text-white/80 mt-1">
+                      Mencari posisi Junior Web Developer / Fullstack Developer di Tangerang Selatan & sekitarnya.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Bio & Interactive Tech Stack */}
+              <div className="lg:col-span-7 order-1 lg:order-2 space-y-8">
+                <div>
+                  <div className="inline-flex items-center gap-2 text-xs font-mono text-blue-400 font-bold tracking-widest mb-2">
+                    <Icon name="user" className="w-4 h-4" />
+                    <span>PROFIL PENGEMBANG</span>
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4 text-glow">
+                    ABOUT ME
+                  </h2>
+                  <p className="text-white/70 leading-relaxed text-sm md:text-base">
+                    Lulusan <strong className="text-white">Teknik Informatika Universitas Pamulang</strong> dengan minat pada pengembangan website dan sistem informasi. Berpengalaman membangun proyek web dari perancangan alur sistem, tampilan frontend, pengelolaan database, hingga deployment — termasuk marketplace dan sistem pendukung keputusan. Disiplin, cepat belajar, dan terbiasa bekerja mandiri maupun dalam tim.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-3 text-xs text-white/60">
+                    <span>📱 0896-0326-3148</span>
+                    <span>📍 Ciputat, Tangerang Selatan</span>
+                    <span>📸 @yonipramudya</span>
+                  </div>
+                </div>
+
+                {/* Tech & Software Skills */}
+                <div>
+                  <h3 className="text-xs font-bold tracking-widest text-blue-400 uppercase font-mono mb-4 flex items-center gap-2">
+                    <Icon name="code" className="w-4 h-4" />
+                    <span>SOFTWARE & TEKNOLOGI SKILLS</span>
+                  </h3>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {[
+                      { name: 'HTML & CSS', icon: 'code', desc: 'Struktur & Styling Web', level: '90%' },
+                      { name: 'JavaScript', icon: 'zap', desc: 'Logika Frontend Dinamis', level: '80%' },
+                      { name: 'PHP', icon: 'terminal', desc: 'Web CRUD & Backend', level: '85%' },
+                      { name: 'Python', icon: 'layers', desc: 'Django & Scripting', level: '80%' },
+                      { name: 'Django', icon: 'globe', desc: 'Framework Web Python', level: '75%' },
+                      { name: 'Tailwind CSS', icon: 'pen-tool', desc: 'Responsive Design', level: '90%' },
+                      { name: 'MySQL / SQL', icon: 'database', desc: 'Relational Database', level: '85%' },
+                      { name: 'Java (Dasar)', icon: 'cpu', desc: 'Pemrograman OOP Dasar', level: '50%' },
+                    ].map((skill, index) => (
+                      <div
+                        key={index}
+                        onClick={() => {
+                          sound.playClick();
+                          showToast(`⚡ Skill: ${skill.name} — ${skill.level}`);
+                        }}
+                        className="glass-card-interactive p-3.5 rounded-2xl cursor-pointer group border border-white/10 hover:border-blue-500/50"
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <Icon name={skill.icon} className="w-4 h-4" />
+                          </div>
+                          <span className="text-[10px] font-mono text-blue-400 font-bold">{skill.level}</span>
+                        </div>
+                        <h4 className="font-bold text-xs text-white group-hover:text-blue-400 transition-colors">{skill.name}</h4>
+                        <p className="text-[10px] text-white/50 mt-0.5">{skill.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Tools & Other Skills */}
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {['VS Code', 'Word', 'Excel', 'PowerPoint', 'Perancangan alur sistem', 'Deployment web', 'ChatGPT & Gemini'].map((tool, i) => (
+                      <span key={i} className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[11px] text-white/70 font-mono">{tool}</span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Education, Experience, & Language Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-white/10">
+                  <div className="p-4 rounded-2xl glass-card border border-white/5">
+                    <h4 className="text-[11px] font-bold font-mono tracking-widest text-blue-400 uppercase mb-3 flex items-center gap-1.5">
+                      <Icon name="graduation-cap" className="w-3.5 h-3.5" />
+                      PENDIDIKAN
+                    </h4>
+                    <div className="space-y-2">
+                      <div>
+                        <p className="text-sm font-bold text-white">S1 Teknik Informatika</p>
+                        <p className="text-xs text-white/60">Universitas Pamulang</p>
+                        <p className="text-[11px] text-blue-400 font-mono">2022 – 2026</p>
+                      </div>
+                      <div className="border-t border-white/10 pt-2">
+                        <p className="text-sm font-bold text-white">Teknik Mesin</p>
+                        <p className="text-xs text-white/60">SMKN 1 Tangerang Selatan</p>
+                        <p className="text-[11px] text-blue-400 font-mono">2019 – 2022</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-2xl glass-card border border-white/5">
+                    <h4 className="text-[11px] font-bold font-mono tracking-widest text-purple-400 uppercase mb-3 flex items-center gap-1.5">
+                      <Icon name="briefcase" className="w-3.5 h-3.5" />
+                      PENGALAMAN KERJA
+                    </h4>
+                    <div className="space-y-2">
+                      <div>
+                        <p className="text-sm font-bold text-white">Frontliner</p>
+                        <p className="text-xs text-white/60">Secondstore, Second Brand Ciputat</p>
+                        <p className="text-[11px] text-purple-400 font-mono">2022 · 7 bulan</p>
+                      </div>
+                      <div className="border-t border-white/10 pt-2">
+                        <p className="text-sm font-bold text-white">Asisten Mekanik</p>
+                        <p className="text-xs text-white/60">CV Rama Teknik Tangsel</p>
+                        <p className="text-[11px] text-purple-400 font-mono">2020 – 2021</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Bahasa */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-3 rounded-xl glass-card border border-white/5 flex justify-between items-center">
+                    <div>
+                      <p className="text-[10px] font-mono text-white/40 uppercase">Bahasa</p>
+                      <p className="text-sm font-bold text-white">Indonesia</p>
+                    </div>
+                    <span className="text-[11px] text-emerald-400 font-mono font-bold">Aktif</span>
+                  </div>
+                  <div className="p-3 rounded-xl glass-card border border-white/5 flex justify-between items-center">
+                    <div>
+                      <p className="text-[10px] font-mono text-white/40 uppercase">Bahasa</p>
+                      <p className="text-sm font-bold text-white">Inggris</p>
+                    </div>
+                    <span className="text-[11px] text-yellow-400 font-mono font-bold">TOEFL 410</span>
+                  </div>
+                </div>
+
+                {/* CV Action Button */}
+                <div className="pt-2">
+                  <button
+                    onClick={() => {
+                      sound.playClick();
+                      showToast('📄 Membuka ringkasan Curriculum Vitae Yoni Pramudya...');
+                    }}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs uppercase tracking-widest transition-all"
+                  >
+                    <Icon name="file-text" className="w-4 h-4 text-blue-400" />
+                    <span>Download / Lihat CV Lengkap</span>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          {/* ========================================================= */}
+          {/* SECTION 3: RECAP PROJECTS 2026 */}
+          {/* ========================================================= */}
+          <section id="projects" className="min-h-screen bg-[#020408] py-28 px-6 md:px-16 lg:px-24 border-t border-white/5">
+            <div className="max-w-7xl mx-auto w-full">
+
+              {/* Header & Filter Controls */}
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+                <div>
+                  <div className="inline-flex items-center gap-2 text-xs font-mono text-blue-400 font-bold tracking-widest mb-2">
+                    <Icon name="folder-git-2" className="w-4 h-4" />
+                    <span>PORTFOLIO SHOWCASE</span>
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-black tracking-tight">
+                    RECAP PROJECT <span className="text-blue-500">2026</span>
+                  </h2>
+                  <p className="text-white/60 text-sm mt-2 max-w-md">
+                    Klik pada kartu proyek untuk melihat detail fitur, studi kasus, dan teknologi yang digunakan.
+                  </p>
+                </div>
+
+                {/* Filter Pills */}
+                <div className="flex flex-wrap gap-2 bg-white/5 p-1.5 rounded-2xl backdrop-blur-md border border-white/10">
+                  {filters.map(filter => (
+                    <button
+                      key={filter}
+                      onClick={() => {
+                        sound.playClick();
+                        setActiveFilter(filter);
+                      }}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold tracking-wider transition-all ${activeFilter === filter
+                          ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
+                          : 'text-white/60 hover:text-white hover:bg-white/10'
+                        }`}
+                    >
+                      {filter}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Search Bar */}
+              <div className="mb-8 max-w-md">
+                <div className="relative">
+                  <Icon name="search" className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Cari proyek (e.g. marketplace, SPK, neon, POS)..."
+                    className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-xs text-white placeholder-white/40"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white"
+                    >
+                      <Icon name="x" className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Projects Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {filteredProjects.map((project) => (
+                  <div
+                    key={project.id}
+                    onClick={() => {
+                      sound.playClick();
+                      setSelectedProject(project);
+                    }}
+                    className="group relative aspect-[4/5] rounded-3xl overflow-hidden glass-card-interactive cursor-pointer border border-white/10 hover:border-blue-500/50"
+                  >
+                    <img
+                      src={project.img}
+                      alt={project.title}
+                      className="w-full h-full object-cover opacity-75 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90 group-hover:opacity-80 transition-opacity"></div>
+
+                    {/* Top pill */}
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-widest bg-black/60 border border-white/15 text-blue-400 backdrop-blur-md">
+                        {project.category}
+                      </span>
+                    </div>
+
+                    {/* Bottom info */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
+                      <h3 className="text-lg font-bold text-white group-hover:text-blue-300 transition-colors leading-snug">
+                        {project.title}
+                      </h3>
+                      <p className="text-xs text-white/60 line-clamp-2 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {project.description}
+                      </p>
+                      <div className="mt-3 flex items-center gap-2 text-xs font-mono text-blue-400 font-bold">
+                        <span>LIHAT DETAIL</span>
+                        <Icon name="arrow-right" className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="text-center text-xs text-white/30 pt-8 border-t border-white/5">
-          &copy; 2026 Yoni Pramudya. All rights reserved.
-        </div>
-      </section>
-    );
 
-    const App = () => {
-      return (
-        <div className="w-full">
-          <Hero />
-          <About />
-          <Projects />
-          <Contact />
+              {filteredProjects.length === 0 && (
+                <div className="text-center py-16 text-white/50 text-sm">
+                  Tidak ada proyek yang sesuai dengan pencarian Anda. Coba kata kunci lain!
+                </div>
+              )}
+
+            </div>
+          </section>
+
+          {/* ========================================================= */}
+          {/* SECTION 4: CONTACT & FOOTER */}
+          {/* ========================================================= */}
+          <section id="contact" className="bg-gradient-cinematic relative pt-24 pb-12 px-6 md:px-16 lg:px-24 overflow-hidden border-t border-white/10">
+            <div className="max-w-7xl mx-auto w-full">
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
+
+                {/* Left: Contact Card & Profile */}
+                <div className="lg:col-span-5">
+                  <div className="glass-card p-8 rounded-3xl relative overflow-hidden border border-white/15 shadow-2xl">
+                    <div className="absolute -top-10 -right-10 w-44 h-44 bg-blue-600/30 blur-3xl rounded-full"></div>
+
+                    <div className="flex items-center justify-between mb-8">
+                      <span className="text-xs font-mono font-bold tracking-widest text-blue-400 uppercase">
+                        HUBUNGI SAYA
+                      </span>
+                      <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] font-mono text-emerald-400 font-bold">
+                        OPEN TO WORK
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-5 mb-8">
+                      <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-white/20 shadow-md">
+                        <img
+                          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200"
+                          alt="Profile"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h4 className="text-xl font-bold text-white">Yoni Pramudya, S.Kom</h4>
+                        <p className="text-xs text-white/50 font-mono mt-0.5">Pamulang, Tangerang Selatan</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      {/* Copy Email Button */}
+                      <button
+                        onClick={copyEmailToClipboard}
+                        className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors group text-left"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <Icon name="mail" className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <p className="text-[10px] text-white/40 uppercase font-mono">Email Pribadi</p>
+                            <p className="text-xs font-semibold text-white/90">yonipramudya9@gmail.com</p>
+                          </div>
+                        </div>
+                        <span className="text-[11px] font-mono text-blue-400 group-hover:underline">Salin</span>
+                      </button>
+
+                      {/* WhatsApp Direct Link */}
+                      <a
+                        href="https://wa.me/6281234567890?text=Halo%20Yoni,%20saya%20tertarik%20bekerja%20sama%20dengan%20Anda!"
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={() => sound.playClick()}
+                        className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors group text-left"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                            <Icon name="message-circle" className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <p className="text-[10px] text-white/40 uppercase font-mono">WhatsApp Direct</p>
+                            <p className="text-xs font-semibold text-white/90">Kirim Pesan WhatsApp</p>
+                          </div>
+                        </div>
+                        <span className="text-[11px] font-mono text-emerald-400 group-hover:underline">Chat →</span>
+                      </a>
+                    </div>
+
+                    {/* Social Media Link Pills */}
+                    <div className="mt-8 pt-6 border-t border-white/10 flex justify-between gap-2">
+                      {[
+                        { label: 'GitHub', icon: 'github', url: 'https://github.com' },
+                        { label: 'LinkedIn', icon: 'linkedin', url: 'https://linkedin.com' },
+                        { label: 'Instagram', icon: 'instagram', url: 'https://instagram.com' },
+                        { label: 'YouTube', icon: 'youtube', url: 'https://youtube.com' }
+                      ].map((soc, idx) => (
+                        <a
+                          key={idx}
+                          href={soc.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={() => sound.playClick()}
+                          className="flex-1 p-2.5 rounded-xl glass-card flex items-center justify-center text-white/60 hover:text-white hover:border-blue-500/50 hover:bg-white/10 transition-all text-xs font-mono"
+                          title={soc.label}
+                        >
+                          <Icon name={soc.icon} className="w-4 h-4" />
+                        </a>
+                      ))}
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* Right: Interactive Contact Form & Past Reels */}
+                <div className="lg:col-span-7 flex flex-col justify-between">
+                  {/* Contact Message Form */}
+                  <div className="glass-card p-8 rounded-3xl border border-white/15 shadow-2xl mb-10">
+                    <h3 className="text-xl font-bold text-white mb-2">Kirim Pesan Langsung</h3>
+                    <p className="text-xs text-white/60 mb-6">Punya tawaran pekerjaan atau ingin berdiskusi? Tuliskan pesan di bawah ini.</p>
+
+                    <form onSubmit={handleContactSubmit} className="space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[11px] font-mono text-white/60 mb-1">NAMA ANDA</label>
+                          <input
+                            type="text"
+                            required
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            placeholder="John Doe"
+                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-xs text-white placeholder-white/30"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-mono text-white/60 mb-1">EMAIL ANDA</label>
+                          <input
+                            type="email"
+                            required
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            placeholder="nama@domain.com"
+                            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-xs text-white placeholder-white/30"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] font-mono text-white/60 mb-1">PESAN / KEBUTUHAN PROYEK</label>
+                        <textarea
+                          rows="3"
+                          required
+                          value={formData.message}
+                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                          placeholder="Ceritakan tentang proyek atau kesempatan kerja sama..."
+                          className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-xs text-white placeholder-white/30 resize-none"
+                        ></textarea>
+                      </div>
+
+                      <div className="flex justify-end">
+                        <button
+                          type="submit"
+                          disabled={formSubmitting}
+                          className="px-8 py-3 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2"
+                        >
+                          <Icon name="send" className="w-3.5 h-3.5" />
+                          <span>{formSubmitting ? 'Mengirim...' : 'Kirim Pesan'}</span>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+                  {/* Past Reels Horizontal Showcase (Fixed with working high-res URLs!) */}
+                  <div>
+                    <div className="flex items-center gap-4 text-white/40 mb-4">
+                      <Icon name="film" className="w-4 h-4 text-blue-400" />
+                      <div className="h-[1px] flex-1 bg-white/10"></div>
+                      <span className="text-xs font-mono font-bold tracking-widest uppercase">PAST REELS & CREATIVE SHOWCASE</span>
+                      <div className="h-[1px] flex-1 bg-white/10"></div>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                      {pastReels.map(reel => (
+                        <div
+                          key={reel.id}
+                          onClick={() => {
+                            sound.playClick();
+                            setSelectedReel(reel);
+                          }}
+                          className="group relative h-24 rounded-2xl overflow-hidden glass-card cursor-pointer border border-white/10 hover:border-blue-500/50 transition-all"
+                        >
+                          <img src={reel.img} alt={reel.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center">
+                              <Icon name="play" className="w-4 h-4 fill-current ml-0.5" />
+                            </div>
+                          </div>
+                          <div className="absolute bottom-2 left-2 right-2">
+                            <p className="text-[10px] font-bold text-white truncate">{reel.title}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Bottom Copyright & Back to Top */}
+              <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/40 font-mono">
+                <div>
+                  &copy; 2026 Yoni Pramudya. All rights reserved. Built with React & Precision.
+                </div>
+                <button
+                  onClick={() => scrollToSection('home')}
+                  className="flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <span>KEMBALI KE ATAS</span>
+                  <Icon name="arrow-up" className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+            </div>
+          </section>
+
+          {/* ========================================================= */}
+          {/* FLOATING ACTION BUTTONS */}
+          {/* ========================================================= */}
+          <div className="fixed bottom-6 left-6 z-30 flex flex-col gap-2">
+            <button
+              onClick={() => {
+                sound.playClick();
+                setIsGameOpen(true);
+              }}
+              className="px-4 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-mono text-xs font-bold tracking-wider shadow-xl shadow-blue-500/30 flex items-center gap-2 hover:scale-105 transition-transform"
+              title="Main Game"
+            >
+              <Icon name="gamepad-2" className="w-4 h-4 text-yellow-300" />
+              <span>PLAY MINI-GAME</span>
+            </button>
+          </div>
+
+          {/* ========================================================= */}
+          {/* MODALS & OVERLAYS */}
+          {/* ========================================================= */}
+          <MiniGameModal
+            isOpen={isGameOpen}
+            onClose={() => setIsGameOpen(false)}
+            onShowToast={showToast}
+          />
+
+          <OptionsModal
+            isOpen={isOptionsOpen}
+            onClose={() => setIsOptionsOpen(false)}
+            soundEnabled={soundEnabled}
+            setSoundEnabled={setSoundEnabled}
+            bgmPlaying={bgmPlaying}
+            onToggleBgm={handleToggleBgm}
+            theme={theme}
+            setTheme={setTheme}
+            scanlines={scanlines}
+            setScanlines={setScanlines}
+            onShowToast={showToast}
+          />
+
+          <ExitModal
+            isOpen={isExitOpen}
+            onClose={() => setIsExitOpen(false)}
+            onOpenGame={() => setIsGameOpen(true)}
+            onScrollTo={scrollToSection}
+          />
+
+          <ProjectDetailModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+            onShowToast={showToast}
+          />
+
+          <ReelModal
+            reel={selectedReel}
+            onClose={() => setSelectedReel(null)}
+          />
+
+          <Toast
+            message={toastMsg}
+            onDismiss={() => setToastMsg('')}
+          />
+
         </div>
       );
     };
 
+    // Render Root
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(<App />);
   </script>
 </body>
+
 </html>
