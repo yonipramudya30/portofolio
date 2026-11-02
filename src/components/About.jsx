@@ -1,5 +1,6 @@
 import React from 'react';
 import { User, Code, Terminal, Database, Layers, Globe, FileText, Briefcase, GraduationCap, Zap } from 'lucide-react';
+import profileImg from '../assets/profile.jpg';
 
 const About = ({ onShowToast }) => {
   // Skills sesuai CV
